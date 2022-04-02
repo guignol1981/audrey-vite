@@ -29,12 +29,12 @@ export class AppPhoto {
         public description: string = '',
         public photoUrl: string = '',
         public photoId: string = '',
-        public boutiqueId: string = '',
         public orientation: 'portrait' | 'paysage' = 'paysage',
         public portfolio: boolean = true,
         public boutique: boolean = true,
         public service: boolean = false,
         public tags: string[] = [],
+        public collection: string = '',
         public supportedProducts: any[] = [],
         public ordre?: number
     ) {}
@@ -55,12 +55,12 @@ export const AppPhotoDataConverter = {
             data.description,
             data.photoUrl,
             data.photoId,
-            data.boutiqueId,
             data.orientation,
             data.portfolio,
             data.boutique,
             data.service,
             data.tags,
+            data.collection,
             data.supportedProducts,
             data.ordre
         );
