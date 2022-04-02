@@ -5,6 +5,7 @@
 
 <script>
 import NavigationVue from './components/Navigation.vue';
+
 export default {
     components: {
         NavigationVue,

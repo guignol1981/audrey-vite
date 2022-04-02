@@ -9,6 +9,8 @@ module.exports = {
             },
             colors: {
                 'green-logo': '#126F43',
+                'blue-logo': '#1B8996',
+                'yellow-logo': '#CD8E33',
             },
         },
     },
