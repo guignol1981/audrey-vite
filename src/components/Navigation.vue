@@ -1,7 +1,12 @@
 <template>
     <div class="z-10 shadow-md">
         <div class="relative lg:hidden">
-            <img src="@/assets/stacked-logo-yellow.png" alt="" />
+            <img
+                v-if="$route.name !== 'portfolio'"
+                src="@/assets/stacked-logo-jaune.png"
+                alt=""
+            />
+            <img v-else src="@/assets/stacked-logo-vert.png" alt="" />
             <button
                 class="absolute top-3 right-3 h-10 w-10 text-gray-700 hover:text-gray-800"
                 @click="mobileRef.show()"
@@ -19,8 +24,15 @@
                     class="flex items-center space-x-6"
                 >
                     <img
+                        v-if="$route.name === 'portfolio'"
                         class="h-32 w-32"
-                        src="@/assets/logo-bleu.png"
+                        src="@/assets/logo-vert.png"
+                        alt=""
+                    />
+                    <img
+                        v-else
+                        class="h-32 w-32"
+                        src="@/assets/logo-jaune.png"
                         alt=""
                     />
                     <div class="flex flex-col space-y-3">

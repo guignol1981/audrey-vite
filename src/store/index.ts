@@ -15,7 +15,14 @@ export default new Vuex.Store({
     state: new AppState(),
     getters: {
         portfolio: (state: AppState): AppPhoto[] => {
-            return state.photos.filter((p) => p.portfolio);
+            return [...state.photos.filter((p) => p.portfolio)].sort((a, b) => {
+                if ((a.ordre || Infinity) > (b.ordre || Infinity)) {
+                    return 1;
+                } else if ((a.ordre || Infinity) < (b.ordre || Infinity)) {
+                    return -1;
+                }
+                return 0;
+            });
         },
         boutique: (state: AppState): AppPhoto[] => {
             return state.photos.filter((p) => p.boutique);

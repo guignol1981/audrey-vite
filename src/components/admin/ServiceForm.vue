@@ -25,6 +25,8 @@
                     id="name"
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 />
+            </div>
+            <div>
                 <label
                     for="description"
                     class="block text-sm font-medium text-gray-700"
@@ -38,6 +40,31 @@
                         class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
                 </div>
+            </div>
+            <div>
+                <label
+                    for="bottomPrice"
+                    class="block text-sm font-medium text-gray-700"
+                    >Prix planché du service (en dollars)</label
+                >
+                <div class="mt-1">
+                    <input
+                        v-model="service.bottomPrice"
+                        type="number"
+                        name="bottomPrice"
+                        id="bottomPrice"
+                        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    />
+                </div>
+            </div>
+            <div class="grid grid-cols-4 space-y-2">
+                <img
+                    v-for="photo in photos"
+                    :key="photo.id"
+                    :src="photo.photoUrl"
+                    :alt="photo.title"
+                    @click="service.photoId = photo.id"
+                />
             </div>
         </div>
         <div class="mt-8 flex space-x-3">
@@ -70,7 +97,6 @@
 </template>
 
 <script>
-import { AppTag, AppTagDataConverter } from '@/models/photo';
 import { ref } from '@vue/reactivity';
 import {
     addDoc,
@@ -82,8 +108,9 @@ import {
     updateDoc,
 } from '@firebase/firestore';
 import { MinusSmIcon, PencilIcon } from '@heroicons/vue/solid';
-import { watch } from '@vue/runtime-core';
 import AppService from '../../models/service';
+import { useStore } from 'vuex';
+import { computed } from '@vue/runtime-core';
 
 export default {
     components: {
@@ -100,9 +127,21 @@ export default {
         const service = ref(new AppService());
         const db = getFirestore();
         const loading = ref(false);
+        const store = useStore();
+
+        const photos = computed(() =>
+            store.state.photos.filter(
+                (p) => p.orientation === 'paysage' && p.service
+            )
+        );
 
         const submit = async () => {
-            if (!service.value.name || !service.value.description) return;
+            if (
+                !service.value.name ||
+                !service.value.description ||
+                !service.value.photoId
+            )
+                return;
 
             loading.value = true;
 
@@ -148,6 +187,7 @@ export default {
             reset,
             loading,
             remove,
+            photos,
         };
     },
 };

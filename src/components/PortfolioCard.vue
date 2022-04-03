@@ -20,8 +20,8 @@
         <div
             class="group translate-y-full space-y-1 transition group-hover:translate-y-0"
         >
-            <a href="#">détails</a>
-            <hr class="mx-auto w-full" />
+            <a href="#" @click.prevent="$emit('selected')">détails</a>
+            <hr class="mx-auto mt-1 w-full" />
         </div>
     </div>
 </template>
@@ -29,6 +29,7 @@
 <script>
 import { ref } from '@vue/reactivity';
 import { AppPhoto } from '../models/photo';
+
 export default {
     props: {
         photo: {
@@ -38,7 +39,6 @@ export default {
     setup(props) {
         const container = ref(null);
         const placeholder = ref(null);
-
         const image = new Image();
 
         image.onload = () => {

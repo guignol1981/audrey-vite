@@ -18,7 +18,7 @@
                                 class="relative flex h-24 cursor-pointer items-center justify-center rounded-md bg-white text-sm font-medium uppercase text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-offset-4"
                                 v-slot="{ selected }"
                             >
-                                <span class="sr-only"> #todo </span>
+                                <span class="sr-only"> {{ photo.title }} </span>
                                 <span
                                     class="absolute inset-0 overflow-hidden rounded-md"
                                 >
@@ -60,14 +60,16 @@
                 </TabGroup>
 
                 <!-- Product info -->
-                <div class="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
+                <div
+                    class="mt-10 flex flex-col items-start px-4 sm:mt-16 sm:px-0 lg:mt-0"
+                >
                     <h1
                         class="text-3xl font-extrabold tracking-tight text-gray-900"
                     >
                         {{ photo.title }}
                     </h1>
 
-                    <div class="mt-6">
+                    <div class="mt-6 flex">
                         <h3 class="sr-only">Description</h3>
 
                         <div
@@ -76,7 +78,7 @@
                         />
                     </div>
 
-                    <div v-if="selectedPrice" class="mt-6">
+                    <div v-if="selectedPrice" class="mt-8">
                         <h2 class="sr-only">Product information</h2>
                         <p class="text-3xl text-gray-900">
                             {{
@@ -101,7 +103,7 @@
                             }}
                         </div>
                         <div
-                            class="flex items-center"
+                            class="mt-2 text-left leading-7 text-gray-500"
                             v-html="
                                 products.find((p) => p.id === selectedProduct)
                                     .description
@@ -109,11 +111,9 @@
                         ></div>
                     </div>
 
-                    <form class="mt-6">
-                        <div>
-                            <h3 class="text-sm text-gray-600">
-                                Choisissez le produit
-                            </h3>
+                    <form class="mt-6 accent-green-logo">
+                        <div class="flex flex-col items-start">
+                            <h3 class="text-gray-800">Choisissez le produit</h3>
 
                             <RadioGroup v-model="selectedProduct" class="mt-2">
                                 <RadioGroupLabel class="sr-only">
@@ -162,7 +162,7 @@
                                 products.find((p) => p.id === selectedProduct)
                                     .prices.length > 1
                             "
-                            class="mt-4"
+                            class="mt-4 flex flex-col items-start"
                         >
                             <h3 class="text-sm text-gray-600">Options</h3>
 
@@ -183,12 +183,12 @@
                                         <div
                                             :class="[
                                                 active && checked
-                                                    ? 'ring ring-offset-1'
+                                                    ? 'rounded-sm ring ring-offset-2'
                                                     : '',
                                                 !active && checked
                                                     ? 'ring-2'
                                                     : '',
-                                                'relative -m-0.5 flex cursor-pointer items-center justify-center p-0.5 focus:outline-none',
+                                                'relative -m-0.5 flex cursor-pointer items-center justify-center p-0.5 p-2 focus:outline-none',
                                             ]"
                                         >
                                             <p>
@@ -208,7 +208,7 @@
                         <div class="sm:flex-col1 mt-10 flex">
                             <button
                                 type="button"
-                                class="btn-primary max-w-xs flex-1 sm:w-full"
+                                class="max-w-xs flex-1 rounded-md bg-green-logo py-3 px-4 text-xl text-white ring-green-logo/25 hover:scale-105 focus:ring-2 active:scale-100 sm:w-full"
                                 @click="toggleItemInCart"
                             >
                                 {{
@@ -326,13 +326,16 @@ export default {
         PlusSmIcon,
     },
     setup() {
-        const selectedPrice = ref('');
         const store = useStore();
         const photo = store.state.photos.find(
             (p) => p.id === store.state.quickviewId
         );
         const products = computed(() => store.state.products);
         const selectedProduct = ref(products.value[0].id);
+        const selectedPrice = ref(
+            products.value.find((p) => p.id === selectedProduct.value)
+                ?.prices[0].id
+        );
 
         watch(
             () => selectedProduct.value,

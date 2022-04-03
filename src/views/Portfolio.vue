@@ -3,32 +3,45 @@
         <div
             v-for="(photo, i) in portfolio"
             :key="i"
-            class="group relative overflow-hidden"
+            class="inner group relative break-inside-avoid overflow-hidden"
         >
             <portfolio-card-vue
                 class="transition group-hover:scale-110"
+                @selected="
+                    store.commit('quickviewId', photo.id);
+                    quickViewOpen = true;
+                "
                 :photo="photo"
             />
         </div>
     </div>
+    <modal-vue :propOpen="quickViewOpen" @close="quickViewOpen = false">
+        <quickview-vue :v-if="quickViewOpen" />
+    </modal-vue>
 </template>
 
 <script>
 import { useStore } from 'vuex';
-import { computed } from '@vue/runtime-core';
+import { computed, ref } from '@vue/runtime-core';
 import PortfolioCardVue from '../components/PortfolioCard.vue';
+import ModalVue from '../components/Modal.vue';
+import QuickviewVue from '../components/Quickview.vue';
 
 export default {
     components: {
         PortfolioCardVue,
+        ModalVue,
+        QuickviewVue,
     },
     setup() {
         const store = useStore();
-
+        const quickViewOpen = ref(false);
         const portfolio = computed(() => store.getters.portfolio);
 
         return {
             portfolio,
+            quickViewOpen,
+            store,
         };
     },
 };

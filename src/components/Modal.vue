@@ -47,7 +47,7 @@
                                 as="h3"
                                 class="text-lg font-medium leading-6 text-gray-900"
                             >
-                                {{ photo.name }}
+                                {{ photo.title }}
                             </DialogTitle>
                             <div class="mt-2">
                                 <slot />
@@ -100,9 +100,11 @@ export default {
         const open = computed(() => props.propOpen);
         const store = useStore();
 
-        const photo = store.state.photos.find(
-            (p) => p.id === store.state.quickviewId
-        );
+        const photo = computed(() => {
+            return store.state.photos.find(
+                (p) => p.id === store.state.quickviewId
+            );
+        });
 
         return {
             open,

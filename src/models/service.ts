@@ -4,7 +4,9 @@ export default class AppService {
     constructor(
         public id: string = '',
         public name: string = '',
-        public description: string = ''
+        public description: string = '',
+        public photoId: string = '',
+        public bottomPrice: number = 0
     ) {}
 
     public static toFirestore(service: AppService): DocumentData {
@@ -16,6 +18,12 @@ export default class AppService {
     public static fromFirestore(snapshot: DocumentSnapshot): AppService {
         const data = snapshot.data()!;
 
-        return new AppService(snapshot.id, data.name, data.description);
+        return new AppService(
+            snapshot.id,
+            data.name,
+            data.description,
+            data.photoId,
+            data.bottomPrice
+        );
     }
 }
