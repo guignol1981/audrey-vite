@@ -6,6 +6,7 @@ import {
     AppTag,
     AppTagDataConverter,
 } from '../models/photo';
+import AppService from '../models/service';
 import AppState from './state';
 
 export default new Vuex.Store({
@@ -47,6 +48,9 @@ export default new Vuex.Store({
         },
         tags(state, tags): void {
             state.tags = [...tags];
+        },
+        services(state, services): void {
+            state.services = [...services];
         },
         toggleFilter(state, tagId: string): void {
             const index = state.filters.indexOf(tagId);
@@ -92,6 +96,24 @@ export default new Vuex.Store({
             });
 
             context.commit('tags', tags);
+        },
+        async loadServices(
+            context: ActionContext<AppState, AppState>
+        ): Promise<void> {
+            const db = getFirestore();
+            const services: AppService[] = [];
+
+            const q = query(
+                collection(db, 'services').withConverter(AppService)
+            );
+
+            const qSnap = await getDocs(q);
+
+            qSnap.forEach((docSnap) => {
+                services.push(docSnap.data());
+            });
+
+            context.commit('services', services);
         },
     },
 });

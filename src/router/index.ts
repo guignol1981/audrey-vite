@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import Portfolio from '../views/Portfolio.vue';
 import AdminPhoto from '../views/AdminPhoto.vue';
 import AdminTag from '../views/AdminTag.vue';
+import AdminService from '../views/AdminService.vue';
 
 export const RoutesNames = {
     Portfolio: 'portfolio',
@@ -11,6 +12,7 @@ export const RoutesNames = {
     AdminPhotos: 'admin-photos',
     AdminTags: 'admin-tags',
     AdminMedias: 'admin-medias',
+    AdminServices: 'admin-services',
 };
 
 const routes: RouteRecordRaw[] = [
@@ -43,6 +45,11 @@ const routes: RouteRecordRaw[] = [
                 path: '/tags',
                 name: RoutesNames.AdminTags,
                 component: AdminTag,
+            },
+            {
+                path: '/services',
+                name: RoutesNames.AdminServices,
+                component: AdminService,
             },
             {
                 path: '/:pathMatch(.*)*',

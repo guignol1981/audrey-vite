@@ -1,5 +1,5 @@
 <template>
-    <div class="columns-3 space-y-3">
+    <div class="columns-2 space-y-4">
         <a
             v-for="(photo, i) in photosForCollections"
             :key="i"

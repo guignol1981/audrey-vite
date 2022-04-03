@@ -1,5 +1,8 @@
 <template>
-    <div ref="container"></div>
+    <div
+        ref="container"
+        class="overflow-hidden transition first:hover:scale-110"
+    ></div>
     <div
         ref="placeholder"
         :class="[

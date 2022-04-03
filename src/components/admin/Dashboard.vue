@@ -203,6 +203,7 @@ import {
     PhotographIcon,
     TagIcon,
     NewspaperIcon,
+    ViewGridIcon,
 } from '@heroicons/vue/outline';
 import { RoutesNames } from '../../router';
 
@@ -232,6 +233,11 @@ export default {
                 name: 'Media',
                 routeName: RoutesNames.AdminMedias,
                 icon: NewspaperIcon,
+            },
+            {
+                name: 'Service',
+                routeName: RoutesNames.AdminServices,
+                icon: ViewGridIcon,
             },
         ];
         return {

@@ -7,5 +7,6 @@ import store from './store';
 
 await store.dispatch('loadPhotos');
 await store.dispatch('loadTags');
+await store.dispatch('loadServices');
 
 createApp(App).use(router).use(store).mount('#app');
