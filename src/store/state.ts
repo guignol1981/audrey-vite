@@ -7,12 +7,7 @@ import {
 } from 'firebase/firestore';
 import AppCollection from '../models/collection';
 import AppFilters from '../models/filters';
-import {
-    AppPhoto,
-    AppPhotoDataConverter,
-    AppTag,
-    AppTagDataConverter,
-} from '../models/photo';
+import { AppPhoto, AppTag } from '../models/photo';
 import AppService from '../models/service';
 
 export default class AppState {

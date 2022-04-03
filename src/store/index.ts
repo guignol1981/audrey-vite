@@ -21,15 +21,10 @@ export default new Vuex.Store({
             return state.photos.filter((p) => p.boutique);
         },
         filteredBoutique: (state: AppState): AppPhoto[] => {
-            if (!state.filters.length)
-                return state.photos.filter((p) => p.boutique);
-
-            return state.photos
-                .filter((p) => p.boutique)
-                .filter((p) => p.tags.some((t) => state.filters.includes(t)));
+            return state.photos.filter((p) => p.boutique);
         },
-        tagGroup: (state: AppState): string[] => {
-            return state.tags.map((t) => t.group);
+        tagGroups: (state: AppState): string[] => {
+            return [...new Set(state.tags.map((t) => t.group))];
         },
     },
     mutations: {

@@ -1,5 +1,5 @@
 <template>
-    <div class="shadow-md">
+    <div class="z-10 shadow-md">
         <div class="relative lg:hidden">
             <img src="@/assets/stacked-logo-yellow.png" alt="" />
             <button

@@ -1,6 +1,6 @@
 <template>
     <div
-        class="grid grid-cols-2 items-end space-y-16 md:grid-cols-4 lg:grid-cols-8"
+        class="grid grid-cols-2 items-end space-y-16 md:grid-cols-4 lg:grid-cols-6"
     >
         <a
             v-for="(photo, i) in photos"
@@ -40,7 +40,9 @@ export default {
     setup() {
         const store = useStore();
         const quickViewOpen = ref(false);
+
         const photos = computed(() => store.getters.filteredBoutique);
+
         return {
             photos,
             quickViewOpen,

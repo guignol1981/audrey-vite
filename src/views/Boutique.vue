@@ -10,7 +10,11 @@
             </div>
             <collection-grid-vue class="mt-4" />
         </template>
-        <boutique-grid-vue v-else />
+        <div v-else>
+            <boutique-filters-vue>
+                <boutique-grid-vue />
+            </boutique-filters-vue>
+        </div>
     </div>
 </template>
 
@@ -20,12 +24,14 @@ import CollectionGridVue from '../components/CollectionGrid.vue';
 import { ArrowCircleRightIcon } from '@heroicons/vue/solid';
 import { useStore } from 'vuex';
 import { computed } from '@vue/runtime-core';
+import BoutiqueFiltersVue from '../components/BoutiqueFilters.vue';
 
 export default {
     components: {
         CollectionGridVue,
         BoutiqueGridVue,
         ArrowCircleRightIcon,
+        BoutiqueFiltersVue,
     },
     setup() {
         const store = useStore();
