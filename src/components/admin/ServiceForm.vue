@@ -145,10 +145,12 @@ export default {
 
             loading.value = true;
 
-            if (service.id) {
-                const docRef = doc(db, 'services', service.id).withConverter(
-                    AppService
-                );
+            if (service.value.id) {
+                const docRef = doc(
+                    db,
+                    'services',
+                    service.value.id
+                ).withConverter(AppService);
 
                 await updateDoc(docRef, { ...service.value }, { merge: true });
             } else {
@@ -168,7 +170,7 @@ export default {
 
             loading.value = true;
 
-            await deleteDoc(service.id);
+            await deleteDoc(service.value.id);
 
             emit('alert', 'Service supprimé!');
 

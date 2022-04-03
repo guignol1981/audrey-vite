@@ -2,11 +2,16 @@
     <div class="z-10 shadow-md">
         <div class="relative lg:hidden">
             <img
-                v-if="$route.name !== 'portfolio'"
+                v-if="$route.name === 'portfolio'"
+                src="@/assets/stacked-logo-vert.png"
+                alt=""
+            />
+            <img
+                v-else-if="$route.name === 'boutique'"
                 src="@/assets/stacked-logo-jaune.png"
                 alt=""
             />
-            <img v-else src="@/assets/stacked-logo-vert.png" alt="" />
+            <img v-else src="@/assets/stacked-logo-bleu.png" alt="" />
             <button
                 class="absolute top-3 right-3 h-10 w-10 text-gray-700 hover:text-gray-800"
                 @click="mobileRef.show()"
@@ -30,9 +35,15 @@
                         alt=""
                     />
                     <img
-                        v-else
+                        v-else-if="$route.name === 'boutique'"
                         class="h-32 w-32"
                         src="@/assets/logo-jaune.png"
+                        alt=""
+                    />
+                    <img
+                        v-else
+                        class="h-32 w-32"
+                        src="@/assets/logo-bleu.png"
                         alt=""
                     />
                     <div class="flex flex-col space-y-3">
