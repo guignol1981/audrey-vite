@@ -7,7 +7,7 @@
         ref="placeholder"
         :class="[
             photo.orientation === 'paysage' ? 'aspect-[3/2]' : 'aspect-[2/3]',
-            'animate-pulse bg-gradient-to-tr from-sky-50 to-sky-600',
+            'animate-pulse bg-gradient-to-tr from-sky-50 to-sky-600/30 blur-sm',
         ]"
     ></div>
     <div

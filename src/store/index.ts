@@ -1,5 +1,7 @@
 import { collection, getDocs, getFirestore, query } from 'firebase/firestore';
 import Vuex, { ActionContext } from 'vuex';
+import AppCollection from '../models/collection';
+import AppFilters from '../models/filters';
 import {
     AppPhoto,
     AppPhotoDataConverter,
@@ -29,18 +31,6 @@ export default new Vuex.Store({
         tagGroup: (state: AppState): string[] => {
             return state.tags.map((t) => t.group);
         },
-        collections: (state: AppState): AppTag[] => {
-            return state.tags.filter((t) => t.group === 'Collections');
-        },
-        photosForCollections: (state: AppState) => (): AppPhoto[] => {
-            return state.tags
-                .filter((t) => t.group === 'Collections')
-                .map((c) => {
-                    return state.photos.find((p) =>
-                        p.tags.includes(c.id ?? '')
-                    )!;
-                });
-        },
     },
     mutations: {
         photos(state, photos): void {
@@ -52,14 +42,11 @@ export default new Vuex.Store({
         services(state, services): void {
             state.services = [...services];
         },
-        toggleFilter(state, tagId: string): void {
-            const index = state.filters.indexOf(tagId);
-
-            if (index !== -1) {
-                state.filters.splice(index, 1);
-            } else {
-                state.filters.push(tagId);
-            }
+        collections(state, collections): void {
+            state.collections = [...collections];
+        },
+        filters(state, filters: AppFilters): void {
+            state.filters = filters;
         },
     },
     actions: {
@@ -114,6 +101,24 @@ export default new Vuex.Store({
             });
 
             context.commit('services', services);
+        },
+        async loadCollections(
+            context: ActionContext<AppState, AppState>
+        ): Promise<void> {
+            const db = getFirestore();
+            const collections: AppCollection[] = [];
+
+            const q = query(
+                collection(db, 'collections').withConverter(AppCollection)
+            );
+
+            const qSnap = await getDocs(q);
+
+            qSnap.forEach((docSnap) => {
+                collections.push(docSnap.data());
+            });
+
+            context.commit('collections', collections);
         },
     },
 });
