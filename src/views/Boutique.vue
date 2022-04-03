@@ -1,5 +1,5 @@
 <template>
-    <div class="mx-auto max-w-full py-12 lg:max-w-7xl">
+    <div class="mx-auto max-w-full py-12 px-12">
         <template v-if="!filters.collection">
             <div class="flex justify-between space-x-4">
                 <h1 class="text-3xl font-semibold">Explorez mes collections</h1>

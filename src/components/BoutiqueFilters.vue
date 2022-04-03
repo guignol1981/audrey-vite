@@ -143,7 +143,7 @@
                 </Dialog>
             </TransitionRoot>
 
-            <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <main class="mx-auto px-4 sm:px-6 lg:px-8">
                 <div
                     class="relative z-10 flex items-baseline justify-between border-b border-gray-200 pt-12 pb-6"
                 >
@@ -155,18 +155,6 @@
 
                     <div class="flex items-center">
                         <Menu as="div" class="relative inline-block text-left">
-                            <div>
-                                <MenuButton
-                                    class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
-                                >
-                                    Sort
-                                    <ChevronDownIcon
-                                        class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
-                                        aria-hidden="true"
-                                    />
-                                </MenuButton>
-                            </div>
-
                             <transition
                                 enter-active-class="transition ease-out duration-100"
                                 enter-from-class="transform opacity-0 scale-95"
@@ -202,13 +190,6 @@
                             </transition>
                         </Menu>
 
-                        <button
-                            type="button"
-                            class="-m-2 ml-5 p-2 text-gray-400 hover:text-gray-500 sm:ml-7"
-                        >
-                            <span class="sr-only">View grid</span>
-                            <ViewGridIcon class="h-5 w-5" aria-hidden="true" />
-                        </button>
                         <button
                             type="button"
                             class="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden"

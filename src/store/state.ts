@@ -16,4 +16,6 @@ export default class AppState {
     public services: AppService[] = [];
     public collections: AppCollection[] = [];
     public filters: AppFilters = new AppFilters();
+    public products: any = [];
+    public quickviewId: string = '';
 }

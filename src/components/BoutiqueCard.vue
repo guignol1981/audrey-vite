@@ -10,14 +10,6 @@
             ]"
         ></div>
     </div>
-    <!-- <img
-        :class="[
-            photo.orientation === 'paysage' ? 'aspect-[3/2]' : 'aspect-[2/3]',
-            'transition group-hover:-translate-y-8 group-hover:scale-105 group-hover:shadow-md',
-        ]"
-        :src="photo.photoUrl"
-        alt=""
-    /> -->
 </template>
 
 <script>

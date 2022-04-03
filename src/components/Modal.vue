@@ -43,10 +43,11 @@
                     >
                         <div class="mt-3 text-center sm:mt-5">
                             <DialogTitle
+                                v-if="photo"
                                 as="h3"
                                 class="text-lg font-medium leading-6 text-gray-900"
                             >
-                                Nom de la photo
+                                {{ photo.name }}
                             </DialogTitle>
                             <div class="mt-2">
                                 <slot />
@@ -55,10 +56,10 @@
                         <div class="mt-5 sm:mt-6">
                             <button
                                 type="button"
-                                class="inline-flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-sm"
+                                class="inline-flex w-full justify-center rounded-md border border-transparent bg-green-logo px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-logo focus:outline-none focus:ring-2 focus:ring-green-logo focus:ring-offset-2 sm:text-sm"
                                 @click="$emit('close')"
                             >
-                                Go back to dashboard
+                                Fermer
                             </button>
                         </div>
                     </div>
@@ -78,6 +79,7 @@ import {
     TransitionRoot,
 } from '@headlessui/vue';
 import { CheckIcon } from '@heroicons/vue/outline';
+import { useStore } from 'vuex';
 
 export default {
     components: {
@@ -96,9 +98,15 @@ export default {
     },
     setup(props) {
         const open = computed(() => props.propOpen);
+        const store = useStore();
+
+        const photo = store.state.photos.find(
+            (p) => p.id === store.state.quickviewId
+        );
 
         return {
             open,
+            photo,
         };
     },
 };

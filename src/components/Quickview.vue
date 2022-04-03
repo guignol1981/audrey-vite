@@ -1,6 +1,7 @@
 <template>
     <div class="bg-white">
         <div
+            v-if="photo"
             class="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8"
         >
             <div class="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
@@ -290,14 +291,70 @@
 </template>
 
 <script>
-import { AppPhoto } from '@/models/photo';
+import { computed, ref, watch } from 'vue';
+import {
+    Disclosure,
+    DisclosureButton,
+    DisclosurePanel,
+    RadioGroup,
+    RadioGroupLabel,
+    RadioGroupOption,
+    Tab,
+    TabGroup,
+    TabList,
+    TabPanel,
+    TabPanels,
+} from '@headlessui/vue';
+import { HeartIcon, MinusSmIcon, PlusSmIcon } from '@heroicons/vue/outline';
+import { useStore } from 'vuex';
 
 export default {
-    props: {
-        photo: {
-            type: AppPhoto,
-        },
+    components: {
+        Disclosure,
+        DisclosureButton,
+        DisclosurePanel,
+        RadioGroup,
+        RadioGroupLabel,
+        RadioGroupOption,
+        Tab,
+        TabGroup,
+        TabList,
+        TabPanel,
+        TabPanels,
+        HeartIcon,
+        MinusSmIcon,
+        PlusSmIcon,
     },
-    setup() {},
+    setup() {
+        const selectedPrice = ref('');
+        const store = useStore();
+        const photo = store.state.photos.find(
+            (p) => p.id === store.state.quickviewId
+        );
+        const products = computed(() => store.state.products);
+        const selectedProduct = ref(products.value[0].id);
+
+        watch(
+            () => selectedProduct.value,
+            (value) => {
+                selectedPrice.value = products.value.find(
+                    (p) => p.id === value
+                )?.prices[0].id;
+            }
+        );
+
+        const toggleItemInCart = () => {};
+
+        const isInCart = ref(false);
+
+        return {
+            isInCart,
+            products,
+            selectedPrice,
+            selectedProduct,
+            photo,
+            toggleItemInCart,
+        };
+    },
 };
 </script>

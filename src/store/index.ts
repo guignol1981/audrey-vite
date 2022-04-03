@@ -43,6 +43,12 @@ export default new Vuex.Store({
         filters(state, filters: AppFilters): void {
             state.filters = filters;
         },
+        quickviewId(state, id: string): void {
+            state.quickviewId = id;
+        },
+        products(state, products: any): void {
+            state.products = [...products];
+        },
     },
     actions: {
         async loadPhotos(
@@ -61,6 +67,34 @@ export default new Vuex.Store({
             });
 
             context.commit('photos', photos);
+        },
+        async loadProducts(
+            context: ActionContext<AppState, AppState>
+        ): Promise<void> {
+            const db = getFirestore();
+            const products: any = [];
+            const q = query(collection(db, 'products'));
+
+            const qSnaps = await getDocs(q);
+
+            qSnaps.forEach(async (docSnap) => {
+                const product = docSnap.data();
+                product.id = docSnap.id;
+                product.prices = [];
+
+                const qSnapsPrice = await getDocs(
+                    collection(db, `products/${docSnap.id}/prices`)
+                );
+
+                qSnapsPrice.forEach((docSnap) => {
+                    const price = docSnap.data();
+                    price.id = docSnap.id;
+                    product.prices.push(price);
+                });
+
+                products.push(product);
+                context.commit('products', products);
+            });
         },
         async loadTags(
             context: ActionContext<AppState, AppState>
