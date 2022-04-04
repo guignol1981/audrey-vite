@@ -37,23 +37,23 @@ const routes: RouteRecordRaw[] = [
         component: () => import('../views/Admin.vue'),
         children: [
             {
-                path: '/photos',
+                path: 'photos',
                 name: RoutesNames.AdminPhotos,
                 component: AdminPhoto,
             },
             {
-                path: '/tags',
+                path: 'tags',
                 name: RoutesNames.AdminTags,
                 component: AdminTag,
             },
             {
-                path: '/services',
+                path: 'services',
                 name: RoutesNames.AdminServices,
                 component: AdminService,
             },
             {
-                path: '/:pathMatch(.*)*',
-                redirect: '/photos',
+                path: ':pathMatch(.*)*',
+                redirect: '/admin/photos',
             },
         ],
     },

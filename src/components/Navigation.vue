@@ -26,7 +26,7 @@
                 <a
                     href="#"
                     @click.prevent="$router.push({ name: 'portfolio' })"
-                    class="flex items-center space-x-6"
+                    class="flex scale-75 items-center space-x-6 xl:scale-100"
                 >
                     <img
                         v-if="$route.name === 'portfolio'"

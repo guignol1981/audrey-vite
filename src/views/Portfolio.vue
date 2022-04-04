@@ -1,6 +1,6 @@
 <template>
     <div
-        class="min-h-screen columns-2 gap-2 space-y-2 px-2 py-12 md:columns-3 lg:columns-4"
+        class="min-h-screen columns-2 gap-2 space-y-2 px-2 py-12 md:columns-3 lg:columns-4 xl:columns-5"
     >
         <div
             v-for="(photo, i) in portfolio"

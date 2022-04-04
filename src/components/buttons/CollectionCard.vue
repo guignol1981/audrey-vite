@@ -7,11 +7,11 @@
         @click.prevent="onClick"
     >
         <a href="#" class="absolute inset-0 flex items-center justify-center">
-            <h1
-                class="bg-gradient-to-tr from-yellow-logo/60 to-yellow-logo p-12 text-3xl font-bold tracking-widest text-white shadow-md transition group-hover:scale-110"
+            <h2
+                class="bg-gradient-to-tr from-yellow-logo/60 to-yellow-logo p-12 text-3xl font-bold uppercase tracking-widest text-white shadow-md backdrop-blur-sm backdrop-sepia"
             >
                 {{ collection.name }}
-            </h1>
+            </h2>
         </a>
     </lazy-photo-vue>
 </template>
