@@ -1,8 +1,13 @@
 <template>
     <div
         ref="container"
-        :class="`h-full opacity-100 transition duration-200 empty:animate-pulse empty:bg-gradient-to-r empty:from-sky-50/20 empty:to-sky-400/20 empty:opacity-25 empty:blur-sm ${classes}`"
-    ></div>
+        :class="[
+            loading ? 'animate-pulse bg-sky-400/10 opacity-25 blur-md' : '',
+            'w-full opacity-100 transition',
+        ]"
+    >
+        <slot />
+    </div>
 </template>
 
 <script>
@@ -14,23 +19,29 @@ export default {
             type: String,
             required: true,
         },
-        classes: {
-            type: String,
-            default: '',
+        imgClasses: {
+            type: [],
+            default: [],
         },
     },
     setup(props) {
         const container = ref(null);
         const image = new Image();
+        const loading = ref(true);
 
         image.onload = () => {
+            props.imgClasses.forEach((c) => {
+                image.classList.add(c);
+            });
             container.value.append(image);
+            loading.value = false;
         };
 
         image.src = props.src;
 
         return {
             container,
+            loading,
         };
     },
 };

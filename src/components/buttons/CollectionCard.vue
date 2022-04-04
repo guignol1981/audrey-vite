@@ -1,26 +1,19 @@
 <template>
-    <a
-        ref="container"
+    <lazy-photo-vue
+        v-if="photo"
         href="#"
-        class="group relative block overflow-hidden transition hover:shadow-md"
+        class="group relative block overflow-hidden bg-yellow-logo/40 transition hover:shadow-md"
+        :src="photo.photoUrl"
         @click.prevent="onClick"
     >
-        <div class="absolute inset-0 flex items-center justify-center">
+        <a href="#" class="absolute inset-0 flex items-center justify-center">
             <h1
                 class="bg-gradient-to-tr from-yellow-logo/60 to-yellow-logo p-12 text-3xl font-bold tracking-widest text-white shadow-md transition group-hover:scale-110"
             >
                 {{ collection.name }}
             </h1>
-        </div>
-    </a>
-    <div
-        v-if="photo"
-        ref="placeholder"
-        :class="[
-            photo.orientation === 'paysage' ? 'aspect-[3/2]' : 'aspect-[2/3]',
-            'animate-pulse bg-gradient-to-tr from-sky-50 to-sky-600/30 blur-sm',
-        ]"
-    ></div>
+        </a>
+    </lazy-photo-vue>
 </template>
 
 <script>
@@ -35,23 +28,20 @@ import {
     where,
 } from '@firebase/firestore';
 import { AppPhotoDataConverter } from '../../models/photo';
+import LazyPhotoVue from '../LazyPhoto.vue';
 
 export default {
+    components: {
+        LazyPhotoVue,
+    },
     props: {
         collection: AppCollection,
     },
     setup(props) {
         const db = getFirestore();
-        const container = ref(null);
-        const placeholder = ref(null);
         const image = new Image();
         const photo = ref(null);
         const store = useStore();
-
-        image.onload = () => {
-            placeholder.value.style.display = 'none';
-            container.value.append(image);
-        };
 
         const loadPhoto = async () => {
             const q = query(
@@ -77,8 +67,6 @@ export default {
         };
 
         return {
-            container,
-            placeholder,
             photo,
             onClick,
         };

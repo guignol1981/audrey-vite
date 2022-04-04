@@ -17,7 +17,7 @@
                 :photo="photo"
             />
             <div
-                class="absolute inset-x-0 -bottom-1 h-4 bg-[url('@/assets/wood.png')] bg-cover bg-center bg-no-repeat shadow-lg"
+                class="absolute inset-x-0 -bottom-1 h-4 bg-[url('@/assets/wood.png')] bg-cover bg-center bg-no-repeat shadow-md"
             ></div>
         </a>
     </div>

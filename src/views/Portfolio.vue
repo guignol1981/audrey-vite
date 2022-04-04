@@ -1,12 +1,13 @@
 <template>
-    <div class="columns-2 gap-2 space-y-2 px-2 py-12 md:columns-3 lg:columns-4">
+    <div
+        class="min-h-screen columns-2 gap-2 space-y-2 px-2 py-12 md:columns-3 lg:columns-4"
+    >
         <div
             v-for="(photo, i) in portfolio"
             :key="i"
             class="inner group relative break-inside-avoid overflow-hidden"
         >
             <portfolio-card-vue
-                class="transition group-hover:scale-110"
                 @selected="
                     store.commit('quickviewId', photo.id);
                     quickViewOpen = true;

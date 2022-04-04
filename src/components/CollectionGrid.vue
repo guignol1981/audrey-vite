@@ -4,6 +4,7 @@
             v-for="(collection, i) in collections"
             :key="i"
             :collection="collection"
+            class="break-inside-avoid"
         />
     </div>
 </template>

@@ -94,7 +94,7 @@
                     </div>
 
                     <!-- Reviews -->
-                    <div v-if="selectedProduct" class="mt-3">
+                    <div v-if="selectedProduct" class="mt-6">
                         <h3 class="sr-only">Selected product</h3>
                         <div class="flex items-center font-semibold">
                             {{
@@ -119,7 +119,9 @@
                                 <RadioGroupLabel class="sr-only">
                                     Produits
                                 </RadioGroupLabel>
-                                <div class="flex items-center space-x-3">
+                                <div
+                                    class="flex flex-wrap items-center space-x-3 space-y-3"
+                                >
                                     <RadioGroupOption
                                         as="template"
                                         v-for="product in products"
@@ -139,10 +141,9 @@
                                             ]"
                                         >
                                             <div class="h-24 w-24">
-                                                <img
+                                                <lazy-photo-vue
                                                     :src="product.images[0]"
-                                                    alt=""
-                                                    class="object-cover"
+                                                    class="aspect-square bg-blue-logo/40 object-cover"
                                                 />
                                             </div>
                                             <RadioGroupLabel
@@ -307,6 +308,7 @@ import {
 } from '@headlessui/vue';
 import { HeartIcon, MinusSmIcon, PlusSmIcon } from '@heroicons/vue/outline';
 import { useStore } from 'vuex';
+import LazyPhotoVue from './LazyPhoto.vue';
 
 export default {
     components: {
@@ -324,6 +326,7 @@ export default {
         HeartIcon,
         MinusSmIcon,
         PlusSmIcon,
+        LazyPhotoVue,
     },
     setup() {
         const store = useStore();
