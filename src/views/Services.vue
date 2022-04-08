@@ -2,14 +2,19 @@
     <section
         class="relative mx-auto max-w-full px-2 py-12 md:max-w-2xl lg:max-w-5xl"
     >
-        <ul role="list" class="space-y-6">
-            <li v-for="(service, i) in services" :key="i">
-                <service-card-vue
-                    :service="service"
-                    :photo="photos.find((p) => p.id === service.photoId)"
-                />
-            </li>
-        </ul>
+        <!-- <ul role="list" class="space-y-6">
+            <li 
+            > -->
+        <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+            <service-card-vue
+                v-for="(service, i) in services"
+                :key="i"
+                :service="service"
+                :photo="photos.find((p) => p.id === service.photoId)"
+            />
+        </div>
+        <!-- </li>
+        </ul> -->
     </section>
 </template>
 

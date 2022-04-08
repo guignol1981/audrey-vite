@@ -20,7 +20,7 @@ export default {
             required: true,
         },
         imgClasses: {
-            type: [],
+            type: Array,
             default: [],
         },
     },

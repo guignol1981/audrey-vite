@@ -11,12 +11,18 @@
         <div
             class="absolute inset-x-0 bottom-0 z-10 hidden h-1/3 items-end justify-between bg-gradient-to-b from-transparent to-green-logo p-3 text-white opacity-0 transition group-hover:opacity-100 md:flex"
         >
-            <span
-                class="translate-y-full text-xl tracking-wider transition hover:scale-105 group-hover:translate-y-0"
-                >Professionnel</span
-            >
+            <div>
+                <a
+                    v-if="photo.serviceId"
+                    href="#"
+                    @click.prevent.stop="$emit('service-selected', service)"
+                    class="translate-y-full text-xl tracking-wider transition hover:scale-105 group-hover:translate-y-0"
+                    >{{ service.name }}</a
+                >
+            </div>
             <div
-                class="group translate-y-full space-y-1 transition group-hover:translate-y-0"
+                class="group translate-y-full space-y-1 justify-self-end transition group-hover:translate-y-0"
+                v-if="photo.boutique"
             >
                 <a
                     href="#"
@@ -30,9 +36,10 @@
 </template>
 
 <script>
-import { ref } from '@vue/reactivity';
 import { AppPhoto } from '../models/photo';
 import LazyPhotoVue from './LazyPhoto.vue';
+import { useStore } from 'vuex';
+import { computed } from '@vue/runtime-core';
 
 export default {
     components: {
@@ -43,6 +50,13 @@ export default {
             type: AppPhoto,
         },
     },
-    setup() {},
+    setup(props) {
+        const store = useStore();
+        const service = computed(() =>
+            store.state.services.find((s) => s.id === props.photo.serviceId)
+        );
+
+        return { service };
+    },
 };
 </script>

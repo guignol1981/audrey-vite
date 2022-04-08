@@ -11,11 +11,11 @@
     <alert-vue :msg="alertMsg" @close="alertMsg = ''" />
 </template>
 <script>
-import TwoColumnsTemplateVue from '@/components/TwoColumnsTemplate.vue';
 import { ref } from '@vue/reactivity';
-import AlertVue from '@/components/Alert.vue';
-import MediaFormVue from '@/components/MediaForm.vue';
-import MediaListVue from '@/components/MediaList.vue';
+import TwoColumnsTemplateVue from '../components/admin/TwoColumnsTemplate.vue';
+import AlertVue from '../components/admin/Alert.vue';
+import MediaFormVue from '../components/admin/MediaForm.vue';
+import MediaListVue from '../components/admin/MediaList.vue';
 
 export default {
     components: {

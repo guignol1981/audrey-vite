@@ -1,10 +1,3 @@
-import {
-    collection,
-    Firestore,
-    getDocs,
-    getFirestore,
-    query,
-} from 'firebase/firestore';
 import AppCollection from '../models/collection';
 import AppFilters from '../models/filters';
 import { AppPhoto, AppTag } from '../models/photo';
