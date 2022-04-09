@@ -2,9 +2,7 @@
     <section
         class="relative mx-auto max-w-full px-2 py-12 md:max-w-2xl lg:max-w-5xl"
     >
-        <!-- <ul role="list" class="space-y-6">
-            <li 
-            > -->
+        <gift-card-section-vue />
         <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
             <service-card-vue
                 v-for="(service, i) in services"
@@ -13,8 +11,6 @@
                 :photo="photos.find((p) => p.id === service.photoId)"
             />
         </div>
-        <!-- </li>
-        </ul> -->
     </section>
 </template>
 
@@ -23,11 +19,13 @@ import SecondaryButtonVue from '../components/buttons/SecondaryButton.vue';
 import { useStore } from 'vuex';
 import { computed } from '@vue/runtime-core';
 import ServiceCardVue from '../components/ServiceCard.vue';
+import GiftCardSectionVue from '../components/GiftCardSection.vue';
 
 export default {
     components: {
         SecondaryButtonVue,
         ServiceCardVue,
+        GiftCardSectionVue,
     },
     setup() {
         const store = useStore();
