@@ -3,6 +3,7 @@ import Portfolio from '../views/Portfolio.vue';
 import AdminPhoto from '../views/AdminPhoto.vue';
 import AdminTag from '../views/AdminTag.vue';
 import AdminService from '../views/AdminService.vue';
+import AdminCollection from '../views/AdminCollection.vue';
 
 export const RoutesNames = {
     Portfolio: 'portfolio',
@@ -13,6 +14,7 @@ export const RoutesNames = {
     AdminTags: 'admin-tags',
     AdminMedias: 'admin-medias',
     AdminServices: 'admin-services',
+    AdminCollections: 'admin-collections',
 };
 
 const routes: RouteRecordRaw[] = [
@@ -37,23 +39,28 @@ const routes: RouteRecordRaw[] = [
         component: () => import('../views/Admin.vue'),
         children: [
             {
-                path: '/photos',
+                path: 'photos',
                 name: RoutesNames.AdminPhotos,
                 component: AdminPhoto,
             },
             {
-                path: '/tags',
+                path: 'tags',
                 name: RoutesNames.AdminTags,
                 component: AdminTag,
             },
             {
-                path: '/services',
+                path: 'services',
                 name: RoutesNames.AdminServices,
                 component: AdminService,
             },
             {
+                path: 'services',
+                name: RoutesNames.AdminCollections,
+                component: AdminCollection,
+            },
+            {
                 path: '/:pathMatch(.*)*',
-                redirect: '/photos',
+                redirect: 'photos',
             },
         ],
     },

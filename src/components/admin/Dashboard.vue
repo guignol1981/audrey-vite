@@ -203,6 +203,7 @@ import {
     PhotographIcon,
     TagIcon,
     NewspaperIcon,
+    BellIcon,
     ViewGridIcon,
 } from '@heroicons/vue/outline';
 import { RoutesNames } from '../../router';
@@ -225,6 +226,11 @@ export default {
                 icon: PhotographIcon,
             },
             {
+                name: 'Collection',
+                routeName: RoutesNames.AdminCollections,
+                icon: ViewGridIcon,
+            },
+            {
                 name: 'Tag',
                 routeName: RoutesNames.AdminTags,
                 icon: TagIcon,
@@ -237,7 +243,7 @@ export default {
             {
                 name: 'Service',
                 routeName: RoutesNames.AdminServices,
-                icon: ViewGridIcon,
+                icon: BellIcon,
             },
         ];
         return {

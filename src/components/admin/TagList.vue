@@ -7,7 +7,7 @@
 
             <ul role="list" class="divide-y divide-gray-200">
                 <li v-for="group in groups" :key="group.name" class="flex py-4">
-                    <a href="#" @click="$emit('edit', group.name)">
+                    <a href="#" @click.prevent="$emit('edit', group.name)">
                         <div class="ml-3">
                             <p class="text-sm font-medium text-gray-900">
                                 {{ group.name }}

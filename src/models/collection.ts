@@ -1,7 +1,11 @@
 import { DocumentData, DocumentSnapshot } from 'firebase/firestore';
 
 export default class AppCollection {
-    constructor(public id: string = '', public name: string = '') {}
+    constructor(
+        public id: string = '',
+        public name: string = '',
+        public photoId: string = ''
+    ) {}
 
     public static toFirestore(collection: AppCollection): DocumentData {
         const doc = { ...collection } as DocumentData;
@@ -12,6 +16,6 @@ export default class AppCollection {
     public static fromFirestore(snapshot: DocumentSnapshot): AppCollection {
         const data = snapshot.data()!;
 
-        return new AppCollection(snapshot.id, data.name);
+        return new AppCollection(snapshot.id, data.name, data.photoId);
     }
 }
