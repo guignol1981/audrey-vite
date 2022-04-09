@@ -3,7 +3,7 @@
         ref="container"
         :class="[
             loading ? 'animate-pulse bg-sky-400/10 opacity-25 blur-md' : '',
-            'w-full opacity-100 transition',
+            'flex w-full items-end opacity-100 transition duration-1000',
         ]"
     >
         <slot />
@@ -20,7 +20,7 @@ export default {
             required: true,
         },
         imgClasses: {
-            type: [],
+            type: Array,
             default: [],
         },
     },
@@ -34,6 +34,7 @@ export default {
                 image.classList.add(c);
             });
             container.value.append(image);
+            container.value.style.background = 'transparent';
             loading.value = false;
         };
 

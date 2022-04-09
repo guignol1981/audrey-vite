@@ -36,7 +36,8 @@ export class AppPhoto {
         public tags: string[] = [],
         public collection: string = '',
         public supportedProducts: any[] = [],
-        public ordre?: number
+        public ordre?: number,
+        public serviceId: string = ''
     ) {}
 }
 
@@ -62,7 +63,8 @@ export const AppPhotoDataConverter = {
             data.tags,
             data.collection,
             data.supportedProducts,
-            data.ordre
+            data.ordre,
+            data.serviceId
         );
     },
 };

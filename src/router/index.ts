@@ -4,6 +4,7 @@ import AdminPhoto from '../views/AdminPhoto.vue';
 import AdminTag from '../views/AdminTag.vue';
 import AdminService from '../views/AdminService.vue';
 import AdminCollection from '../views/AdminCollection.vue';
+import AdminMedia from '../views/AdminMedia.vue';
 
 export const RoutesNames = {
     Portfolio: 'portfolio',
@@ -47,6 +48,11 @@ const routes: RouteRecordRaw[] = [
                 path: 'tags',
                 name: RoutesNames.AdminTags,
                 component: AdminTag,
+            },
+            {
+                path: 'medias',
+                name: RoutesNames.AdminMedias,
+                component: AdminMedia,
             },
             {
                 path: 'services',

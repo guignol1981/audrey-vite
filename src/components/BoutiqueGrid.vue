@@ -13,7 +13,7 @@
             "
         >
             <boutique-card-vue
-                class="'transition duration-500 group-hover:-translate-y-8 group-hover:scale-105 group-hover:shadow-md"
+                class="'transition group-hover:-translate-y-8 group-hover:scale-105 group-hover:shadow-md"
                 :photo="photo"
             />
             <div

@@ -68,6 +68,7 @@
                 :productSelection="photo.supportedProducts"
                 @selection-updated="photo.supportedProducts = $event"
             />
+
             <div>
                 <label class="text-base font-medium text-gray-900"
                     >Visibilité</label
@@ -99,6 +100,28 @@
                         </div>
                     </div>
                 </div>
+            </div>
+             <div v-if="photo.service">
+                <label
+                    for="service"
+                    class="block text-sm font-medium text-gray-700"
+                    >Service</label
+                >
+
+                <select
+                    name="service"
+                    id="service"
+                    v-model="photo.serviceId"
+                    class="w-full rounded-md py-2 px-3"
+                >
+                    <option
+                        v-for="service in services"
+                        :key="service.id"
+                        :value="service.id"
+                    >
+                        {{ service.name }}
+                    </option>
+                </select>
             </div>
             <div v-if="!photo.photoUrl">
                 <label class="text-base font-medium text-gray-900"
@@ -200,6 +223,7 @@ import { watch } from '@vue/runtime-core';
 import FileUploaderVue from './FileUploader.vue';
 import TagSelectVue from './TagSelect.vue';
 import ProductSelectVue from './ProductSelect.vue';
+import { useStore } from 'vuex';
 
 const orientations = ['paysage', 'portrait'];
 
@@ -220,6 +244,8 @@ export default {
         const loading = ref(false);
         const fileUploader = ref(null);
         const db = getFirestore();
+        const store = useStore();
+        const services = ref(store.state.services);
 
         const cantSubmit = () => {
             return (
@@ -317,6 +343,7 @@ export default {
             remove,
             orientations,
             loading,
+            services,
         };
     },
 };

@@ -1,12 +1,11 @@
 <template>
     <two-columns-template-vue class="relative">
-        <template #list
-            ><service-list-vue @edit="editName = $event" />
-        </template>
+        <template #list><service-list-vue @edit="editId = $event" /> </template>
         <template #form
             ><service-form-vue
+                :id="editId"
                 @alert="alertMsg = $event"
-                @reset="editName = ''"
+                @reset="editId = ''"
             />
         </template>
     </two-columns-template-vue>
@@ -14,6 +13,7 @@
 </template>
 
 <script>
+import { ref } from '@vue/reactivity';
 import AlertVue from '../components/admin/Alert.vue';
 import ServiceFormVue from '../components/admin/ServiceForm.vue';
 import ServiceListVue from '../components/admin/ServiceList.vue';
@@ -25,6 +25,12 @@ export default {
         ServiceListVue,
         ServiceFormVue,
     },
-    setup() {},
+    setup() {
+        const editId = ref('');
+
+        return {
+            editId,
+        };
+    },
 };
 </script>

@@ -57,14 +57,27 @@
                     />
                 </div>
             </div>
-            <div class="grid grid-cols-4 space-y-2">
-                <img
+            <div v-if="service.photoId">
+                <span
+                    >Photo:
+                    {{
+                        photos.find((p) => p.id === service.photoId).title
+                    }}</span
+                >
+            </div>
+            <div class="grid grid-cols-4 gap-1">
+                <a
                     v-for="photo in photos"
                     :key="photo.id"
-                    :src="photo.photoUrl"
-                    :alt="photo.title"
-                    @click="service.photoId = photo.id"
-                />
+                    href="#"
+                    @click.prevent="service.photoId = photo.id"
+                >
+                    <img
+                        :src="photo.photoUrl"
+                        :alt="photo.title"
+                        @click="service.photoId = photo.id"
+                    />
+                </a>
             </div>
         </div>
         <div class="mt-8 flex space-x-3">
@@ -103,6 +116,7 @@ import {
     collection,
     deleteDoc,
     doc,
+    getDoc,
     getFirestore,
     setDoc,
     updateDoc,
@@ -110,7 +124,7 @@ import {
 import { MinusSmIcon, PencilIcon } from '@heroicons/vue/solid';
 import AppService from '../../models/service';
 import { useStore } from 'vuex';
-import { computed } from '@vue/runtime-core';
+import { computed, watch } from '@vue/runtime-core';
 
 export default {
     components: {
@@ -128,6 +142,21 @@ export default {
         const db = getFirestore();
         const loading = ref(false);
         const store = useStore();
+
+        watch(
+            () => props.id,
+            async () => {
+                if (props.id) {
+                    const docRef = doc(db, 'services', props.id).withConverter(
+                        AppService
+                    );
+                    const docSnap = await getDoc(docRef);
+                    service.value = docSnap.data();
+                } else {
+                    service.value = new AppService();
+                }
+            }
+        );
 
         const photos = computed(() =>
             store.state.photos.filter(
@@ -152,7 +181,7 @@ export default {
                     service.value.id
                 ).withConverter(AppService);
 
-                await updateDoc(docRef, { ...service.value }, { merge: true });
+                await setDoc(docRef, { ...service.value }, { merge: true });
             } else {
                 await addDoc(
                     collection(db, 'services').withConverter(AppService),
@@ -160,6 +189,7 @@ export default {
                 );
             }
 
+            loading.value = false;
             emit('alert', 'Service sauvegardé!');
 
             reset();
@@ -170,9 +200,11 @@ export default {
 
             loading.value = true;
 
-            await deleteDoc(service.value.id);
+            await deleteDoc(doc(db, 'services', service.value.id));
 
             emit('alert', 'Service supprimé!');
+
+            loading.value = false;
 
             reset();
         };
