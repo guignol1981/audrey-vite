@@ -1,6 +1,6 @@
 <template>
     <div>
-        <lazy-photo-vue :src="photo.photoUrl" class="relative">
+        <lazy-photo-vue :src="photo.photoUrl" class="relative -z-10">
             <div class="absolute inset-0 grid place-content-center">
                 <h2
                     class="bg-gradient-to-tr from-sky-100/60 to-sky-300/60 p-12 text-3xl font-bold uppercase tracking-widest text-white shadow-md backdrop-blur-sm backdrop-sepia"
@@ -25,7 +25,7 @@
                 <a
                     href="#"
                     class="text-blue-logo underline hover:underline-offset-1"
-                    >prendre rendez-vous</a
+                    >contactez-moi</a
                 >
             </div>
         </div>
@@ -43,19 +43,19 @@ export default {
         LazyPhotoVue,
     },
     props: {
-        service: {
-            type: AppService,
+        serviceId: {
+            type: String,
             required: true,
         },
     },
     setup(props) {
         const store = useStore();
-
-        const photo = computed(() =>
-            store.state.photos.find((p) => p.id === props.service.photoId)
+        const service = store.state.services.find(
+            (s) => s.id === props.serviceId
         );
+        const photo = store.state.photos.find((p) => p.id === service.photoId);
 
-        return { photo };
+        return { service, photo };
     },
 };
 </script>

@@ -1,5 +1,7 @@
 <template>
-    <div class="columns-1 space-y-4 md:columns-2 lg:columns-3">
+    <div
+        class="mx-auto columns-1 space-y-4 md:max-w-5xl md:columns-2 lg:columns-3"
+    >
         <collection-card-vue
             v-for="(collection, i) in collections"
             :key="i"
@@ -20,7 +22,7 @@ export default {
     },
     setup() {
         const store = useStore();
-        const collections = computed(() => store.state.collections);
+        const collections = store.state.collections;
 
         return {
             collections,

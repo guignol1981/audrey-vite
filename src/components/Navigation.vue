@@ -1,5 +1,5 @@
 <template>
-    <div class="z-10 shadow-md">
+    <div class="z-20 bg-white shadow-md md:sticky md:top-0">
         <div class="relative lg:hidden">
             <img
                 v-if="$route.name === 'portfolio'"
@@ -13,7 +13,7 @@
             />
             <img v-else src="@/assets/stacked-logo-bleu.png" alt="" />
             <button
-                class="absolute top-3 right-3 h-10 w-10 text-gray-700 hover:text-gray-800"
+                class="fixed top-3 right-3 z-20 h-10 w-10 rounded-full bg-white p-2 text-gray-700 shadow-md hover:text-gray-800"
                 @click="mobileRef.show()"
             >
                 <MenuIcon />

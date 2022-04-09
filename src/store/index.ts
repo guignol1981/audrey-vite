@@ -50,9 +50,6 @@ export default new Vuex.Store({
         filters(state, filters: AppFilters): void {
             state.filters = filters;
         },
-        quickviewId(state, id: string): void {
-            state.quickviewId = id;
-        },
         products(state, products: any): void {
             state.products = [...products];
         },

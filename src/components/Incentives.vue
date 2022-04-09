@@ -1,6 +1,6 @@
 '
 <template>
-    <div class="bg-gray-50">
+    <div class="bg-blue-logo/5">
         <h2 class="sr-only">Faites affaire en confiance</h2>
         <div class="mx-auto max-w-7xl py-16 sm:px-2 lg:px-4">
             <div
@@ -12,10 +12,9 @@
                     class="flex-col items-center space-y-5 sm:flex"
                 >
                     <div class="mx-auto">
-                        <img
-                            class="mx-auto h-24 w-28"
-                            :src="incentive.image"
-                            alt=""
+                        <component
+                            :is="incentive.icon"
+                            class="h-12 w-12 fill-blue-logo stroke-black"
                         />
                     </div>
                     <div class="mt-3 sm:mt-0 sm:ml-3">
@@ -33,23 +32,31 @@
 </template>
 
 <script>
+import CoinIconVue from './icons/CoinIcon.vue';
+import QuebecIconVue from './icons/QuebecIcon.vue';
+import WarrantyVue from './icons/Warranty.vue';
 export default {
+    components: {
+        QuebecIconVue,
+        CoinIconVue,
+        WarrantyVue,
+    },
     setup() {
         const incentives = [
             {
                 title: 'Fait au Québec',
                 description: `En plus d'encourager une artiste du Québec, mes impressions sont effectués localement par des gens d'ici.`,
-                image: 'https://tailwindui.com/img/ecommerce/icons/icon-planet-light.svg',
+                icon: QuebecIconVue,
             },
             {
                 title: 'Épargnez sur la livraison',
                 description: `Livraison gratuite pour toute commande de 200,00$+`,
-                image: 'https://tailwindui.com/img/ecommerce/icons/icon-delivery-light.svg',
+                icon: CoinIconVue,
             },
             {
                 title: 'Satisfaction garantie',
                 description: `Si vous n'êtes pas entièrement satisait(e) de votre achat, vous aurez la possibilité d'échanger pour un autre produit de même valeur.`,
-                image: 'https://tailwindui.com/img/ecommerce/icons/icon-warranty-light.svg',
+                icon: WarrantyVue,
             },
         ];
 

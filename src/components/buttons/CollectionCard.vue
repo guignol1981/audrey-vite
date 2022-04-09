@@ -38,29 +38,10 @@ export default {
         collection: AppCollection,
     },
     setup(props) {
-        const db = getFirestore();
-        const image = new Image();
-        const photo = ref(null);
         const store = useStore();
-
-        const loadPhoto = async () => {
-            const q = query(
-                collection(db, 'photos').withConverter(AppPhotoDataConverter),
-                where('collection', '==', props.collection.id)
-            );
-
-            const docSpaps = await getDocs(q);
-
-            docSpaps.forEach((docSnap) => {
-                photo.value = docSnap.data();
-                return false;
-            });
-
-            image.src = photo.value.photoUrl;
-        };
-
-        loadPhoto();
-
+        const photo = store.state.photos.find(
+            (p) => p.id === props.collection.photoId
+        );
         const onClick = () => {
             const filters = store.state.filters;
             filters.collection = props.collection.id;

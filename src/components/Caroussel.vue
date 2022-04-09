@@ -1,6 +1,6 @@
 <template>
     <TabGroup as="div" class="flex flex-col-reverse">
-        <TabPanels class="'w-full mt-6">
+        <TabPanels class="'w-full mt-6 shadow-md">
             <TabPanel>
                 <img :src="photo.photoUrl" />
             </TabPanel>

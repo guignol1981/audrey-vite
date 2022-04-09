@@ -7,31 +7,27 @@
             :key="i"
             class="inner group relative break-inside-avoid overflow-hidden"
         >
-            <portfolio-card-vue
-                @selected="
-                    store.commit('quickviewId', photo.id);
-                    quickViewOpen = true;
-                "
-                @service-selected="serviceQuickview = $event"
-                :photo="photo"
-            />
+            <portfolio-card-vue :photo="photo" @click="onCardClick(photo)" />
         </div>
     </div>
-    <modal-vue :propOpen="quickViewOpen" @close="quickViewOpen = false">
-        <quickview-vue :v-if="quickViewOpen" />
+    <modal-vue :propOpen="!!photoQuickviewId" @close="photoQuickviewId = ''">
+        <quickview-vue :v-if="quickViewOpen" :photo-id="photoQuickviewId" />
     </modal-vue>
     <modal-vue
-        :propOpen="!!serviceQuickview"
-        @close="serviceQuickview = null"
-        class="mx-auto w-1/3"
+        :propOpen="!!serviceQuickviewId"
+        @close="serviceQuickviewId = ''"
+        class="mx-auto max-w-full sm:max-w-2xl"
     >
-        <service-card-vue v-if="serviceQuickview" :service="serviceQuickview" />
+        <service-card-vue
+            v-if="serviceQuickviewId"
+            :service-id="serviceQuickviewId"
+        />
     </modal-vue>
 </template>
 
 <script>
 import { useStore } from 'vuex';
-import { computed, ref } from '@vue/runtime-core';
+import { computed, onBeforeUnmount, ref } from '@vue/runtime-core';
 import PortfolioCardVue from '../components/PortfolioCard.vue';
 import ModalVue from '../components/Modal.vue';
 import QuickviewVue from '../components/Quickview.vue';
@@ -46,17 +42,25 @@ export default {
     },
     setup() {
         const store = useStore();
-        const quickViewOpen = ref(false);
-        const serviceQuickview = ref(null);
+        const photoQuickviewId = ref('');
+        const serviceQuickviewId = ref('');
         const portfolio = computed(() => store.getters.portfolio);
-        const photos = computed(() => store.state.photos);
+
+        const onCardClick = (photo) => {
+            if (photo.boutique) {
+                photoQuickviewId.value = photo.id;
+            } else {
+                serviceQuickviewId.value = photo.serviceId;
+            }
+        };
+
+        onBeforeUnmount(() => {});
 
         return {
             portfolio,
-            quickViewOpen,
-            serviceQuickview,
-            store,
-            photos,
+            onCardClick,
+            photoQuickviewId,
+            serviceQuickviewId,
         };
     },
 };

@@ -2,7 +2,7 @@
     <div
         class="grid grid-cols-1 gap-5 rounded-lg py-12 px-6 md:px-0 lg:grid-cols-2"
     >
-        <div class="w-full border">
+        <div class="w-full border bg-white/0 backdrop-blur-[2px]">
             <div
                 class="flex flex-col items-center justify-center space-y-5 py-14"
             >
@@ -56,11 +56,24 @@
 <script>
 import PricedropDownVue from './PricedropDown.vue';
 import { ShoppingBagIcon } from '@heroicons/vue/solid';
+import { useStore } from 'vuex';
+
 export default {
     components: {
         PricedropDownVue,
         ShoppingBagIcon,
     },
-    setup() {},
+    setup() {
+        const store = useStore();
+        const product = store.state.products.find(
+            (p) => p.id === 'prod_LTdQeY0X64xpPT'
+        );
+
+        console.log(product);
+
+        return {
+            product,
+        };
+    },
 };
 </script>

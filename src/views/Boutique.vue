@@ -1,16 +1,16 @@
 <template>
-    <div class="mx-auto max-w-full py-12 px-12">
+    <div class="mx-auto max-w-full py-12">
         <template v-if="!filters.collection">
             <div class="flex justify-between space-x-4">
                 <h1 class="text-3xl font-semibold">Explorez mes collections</h1>
                 <a href="#" class="flex space-x-4">
-                    <span class="underline">voir toutes les photos</span>
+                    <span class="underline">voir tout</span>
                     <ArrowCircleRightIcon class="block h-5 w-5" />
                 </a>
             </div>
             <collection-grid-vue class="mt-4" />
         </template>
-        <div v-else>
+        <div v-else class="py-12 px-12">
             <boutique-filters-vue>
                 <boutique-grid-vue />
             </boutique-filters-vue>

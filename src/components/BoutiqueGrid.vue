@@ -5,12 +5,9 @@
         <a
             v-for="(photo, i) in photos"
             :key="i"
-            class="group relative px-4"
             href="#"
-            @click.prevent="
-                onPhotoClick(photo.id);
-                quickViewOpen = true;
-            "
+            class="group relative px-4"
+            @click.prevent="photoQuickviewId = photo.id"
         >
             <boutique-card-vue
                 class="'transition group-hover:-translate-y-8 group-hover:scale-105 group-hover:shadow-md"
@@ -21,8 +18,8 @@
             ></div>
         </a>
     </div>
-    <modal-vue :propOpen="quickViewOpen" @close="quickViewOpen = false">
-        <quickview-vue :v-if="quickViewOpen" />
+    <modal-vue :propOpen="!!photoQuickviewId" @close="photoQuickviewId = ''">
+        <quickview-vue :v-if="photoQuickviewId" :photo-id="photoQuickviewId" />
     </modal-vue>
 </template>
 
@@ -42,18 +39,13 @@ export default {
     },
     setup() {
         const store = useStore();
-        const quickViewOpen = ref(false);
+        const photoQuickviewId = ref('');
 
         const photos = computed(() => store.getters.filteredBoutique);
 
-        const onPhotoClick = (id) => {
-            store.commit('quickviewId', id);
-        };
-
         return {
             photos,
-            quickViewOpen,
-            onPhotoClick,
+            photoQuickviewId,
         };
     },
 };

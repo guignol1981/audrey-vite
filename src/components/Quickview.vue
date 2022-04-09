@@ -99,11 +99,15 @@ export default {
         ProductGridVue,
         CarousselVue,
     },
-    setup() {
+    props: {
+        photoId: {
+            type: String,
+            required: true,
+        },
+    },
+    setup(props) {
         const store = useStore();
-        const photo = store.state.photos.find(
-            (p) => p.id === store.state.quickviewId
-        );
+        const photo = store.state.photos.find((p) => p.id === props.photoId);
         const products = computed(() => store.state.products);
         const selectedProductId = ref(products.value[0].id);
 
