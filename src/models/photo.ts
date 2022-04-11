@@ -34,9 +34,9 @@ export class AppPhoto {
         public boutique: boolean = true,
         public service: boolean = false,
         public tags: string[] = [],
-        public collection: string = '',
+        public collectionId: string = '',
         public supportedProducts: any[] = [],
-        public ordre?: number,
+        public ordre: number = 0,
         public serviceId: string = ''
     ) {}
 }
@@ -61,7 +61,7 @@ export const AppPhotoDataConverter = {
             data.boutique,
             data.service,
             data.tags,
-            data.collection,
+            data.collectionId,
             data.supportedProducts,
             data.ordre,
             data.serviceId

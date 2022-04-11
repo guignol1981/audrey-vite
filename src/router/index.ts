@@ -10,6 +10,7 @@ export const RoutesNames = {
     Portfolio: 'portfolio',
     Boutique: 'boutique',
     Services: 'services',
+    About: 'a-propos',
     Admin: 'admin',
     AdminPhotos: 'admin-photos',
     AdminTags: 'admin-tags',
@@ -33,6 +34,11 @@ const routes: RouteRecordRaw[] = [
         path: '/services',
         name: RoutesNames.Services,
         component: () => import('../views/Services.vue'),
+    },
+    {
+        path: '/a-propos',
+        name: RoutesNames.About,
+        component: () => import('../views/About.vue'),
     },
     {
         path: '/admin',

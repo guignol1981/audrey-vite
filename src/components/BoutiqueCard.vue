@@ -2,11 +2,12 @@
     <lazy-photo-vue
         :src="photo.photoUrl"
         :class="[
-            photo.orientation === 'paysage' ? 'aspect-[3/2]' : 'aspect-[2/3]',
+            photo.orientation === 'paysage'
+                ? 'aspect-[3/2] w-48'
+                : 'aspect-[2/3] h-48',
             ' bg-yellow-logo/40',
         ]"
     >
-        <div ref="placeholder"></div>
     </lazy-photo-vue>
 </template>
 

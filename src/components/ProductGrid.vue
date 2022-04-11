@@ -90,10 +90,21 @@ export default {
     components: {
         LazyPhotoVue,
     },
-    setup() {
+    props: {
+        photoId: {
+            type: String,
+            required: true,
+        },
+    },
+    setup(props) {
         const store = useStore();
-        const products = computed(() => store.state.products);
-        const selection = ref(products.value[0].id);
+        const photo = store.state.photos.find((p) => p.id === props.photoId);
+        const products = computed(() =>
+            store.state.products.filter((p) =>
+                photo.supportedProducts.includes(p.id)
+            )
+        );
+        const selection = ref(products.value[0].id ?? '');
 
         const selectedPrice = ref(
             products.value.find((p) => p.id === selection.value).prices[0].id

@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white">
+    <div class="bg-white px-12">
         <div>
             <!-- Mobile filter dialog -->
             <TransitionRoot as="template" :show="mobileFiltersOpen">
@@ -63,7 +63,14 @@
                                     >
                                         <a
                                             href="#"
-                                            class="block px-2 py-3"
+                                            :class="[
+                                                'block px-2 py-3',
+                                                selectedCollection &&
+                                                selectedCollection.id ===
+                                                    collection.id
+                                                    ? 'font-bold'
+                                                    : '',
+                                            ]"
                                             @click.prevent="
                                                 filters.collection =
                                                     collection.id
@@ -125,7 +132,8 @@
                                                             tag.id
                                                         )
                                                     "
-                                                    class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                    @input="onTagClick(tag)"
+                                                    class="h-4 w-4 rounded border-gray-300 text-yellow-logo focus:ring-yellow-logo"
                                                 />
                                                 <label
                                                     :for="`filter-mobile-${tag.id}`"
@@ -148,57 +156,21 @@
                     class="relative z-10 flex items-baseline justify-between border-b border-gray-200 pt-12 pb-6"
                 >
                     <h1
+                        v-if="selectedCollection"
                         class="text-4xl font-extrabold tracking-tight text-gray-900"
                     >
-                        {{ selectedCollectionName }}
+                        {{ selectedCollection.name }}
                     </h1>
+                    <div v-else></div>
 
-                    <div class="flex items-center">
-                        <Menu as="div" class="relative inline-block text-left">
-                            <transition
-                                enter-active-class="transition ease-out duration-100"
-                                enter-from-class="transform opacity-0 scale-95"
-                                enter-to-class="transform opacity-100 scale-100"
-                                leave-active-class="transition ease-in duration-75"
-                                leave-from-class="transform opacity-100 scale-100"
-                                leave-to-class="transform opacity-0 scale-95"
-                            >
-                                <MenuItems
-                                    class="absolute right-0 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none"
-                                >
-                                    <div class="py-1">
-                                        <MenuItem
-                                            v-for="option in sortOptions"
-                                            :key="option.name"
-                                            v-slot="{ active }"
-                                        >
-                                            <a
-                                                :href="option.href"
-                                                :class="[
-                                                    option.current
-                                                        ? 'font-medium text-gray-900'
-                                                        : 'text-gray-500',
-                                                    active ? 'bg-gray-100' : '',
-                                                    'block px-4 py-2 text-sm',
-                                                ]"
-                                            >
-                                                {{ option.name }}
-                                            </a>
-                                        </MenuItem>
-                                    </div>
-                                </MenuItems>
-                            </transition>
-                        </Menu>
-
-                        <button
-                            type="button"
-                            class="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden"
-                            @click="mobileFiltersOpen = true"
-                        >
-                            <span class="sr-only">Filters</span>
-                            <FilterIcon class="h-5 w-5" aria-hidden="true" />
-                        </button>
-                    </div>
+                    <button
+                        type="button"
+                        @click="clearFilters"
+                        class="flex space-x-2 text-gray-500 hover:text-gray-700 active:scale-95"
+                    >
+                        <span> Réinitisaliser les filtres </span>
+                        <RefreshIcon class="h-6 w-6" />
+                    </button>
                 </div>
 
                 <section aria-labelledby="products-heading" class="pt-6 pb-24">
@@ -218,6 +190,13 @@
                                 >
                                     <a
                                         href="#"
+                                        :class="[
+                                            selectedCollection &&
+                                            selectedCollection.id ===
+                                                collection.id
+                                                ? 'font-bold'
+                                                : '',
+                                        ]"
                                         @click.prevent="
                                             filters.collection = collection.id
                                         "
@@ -274,7 +253,8 @@
                                                         tag.id
                                                     )
                                                 "
-                                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                @input="onTagClick(tag)"
+                                                class="h-4 w-4 rounded border-gray-300 text-yellow-logo focus:ring-yellow-logo"
                                             />
                                             <label
                                                 :for="`filter-${tag.id}`"
@@ -288,7 +268,7 @@
                             </Disclosure>
                         </form>
 
-                        <div class="lg:col-span-3">
+                        <div class="p-8 lg:col-span-3">
                             <slot />
                         </div>
                     </div>
@@ -299,7 +279,7 @@
 </template>
 
 <script>
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import {
     Dialog,
     DialogOverlay,
@@ -320,8 +300,10 @@ import {
     MinusSmIcon,
     PlusSmIcon,
     ViewGridIcon,
+    RefreshIcon,
 } from '@heroicons/vue/solid';
 import { useStore } from 'vuex';
+import AppFilters from '../models/filters';
 
 export default {
     components: {
@@ -329,6 +311,7 @@ export default {
         DialogOverlay,
         Disclosure,
         DisclosureButton,
+        RefreshIcon,
         DisclosurePanel,
         Menu,
         MenuButton,
@@ -345,27 +328,53 @@ export default {
     },
     setup() {
         const store = useStore();
-        const filters = computed(() => store.state.filters);
+        const filters = ref(store.state.filters);
         const collections = computed(() => store.state.collections);
         const tagGroups = computed(() => store.getters.tagGroups);
+
+        watch(
+            () => store.state.filters,
+            () => (filters.value = store.state.filters)
+        );
 
         const tagsForGroup = (groupName) => {
             return store.state.tags.filter((t) => t.group === groupName);
         };
 
-        const selectedCollectionName = computed(() => {
-            return (
-                store.state.collections.find(
-                    (c) => c.id === store.state.filters.collection
-                )?.name ?? ''
+        const selectedCollection = computed(() => {
+            return store.state.collections.find(
+                (c) => c.id === store.state.filters.collection
             );
         });
+
+        const onTagClick = (tag) => {
+            const index = filters.value.tags.indexOf(tag.id);
+
+            if (index !== -1) {
+                filters.value.tags.splice(index, 1);
+            } else {
+                filters.value.tags.push(tag.id);
+            }
+
+            store.commit('filters', filters.value);
+        };
+
+        const clearFilters = () => {
+            filters.value = new AppFilters();
+
+            filters.value.showAll = true;
+
+            store.commit('filters', filters.value);
+        };
+
         const mobileFiltersOpen = ref(false);
 
         return {
+            clearFilters,
+            onTagClick,
             filters,
             mobileFiltersOpen,
-            selectedCollectionName,
+            selectedCollection,
             collections,
             tagGroups,
             tagsForGroup,

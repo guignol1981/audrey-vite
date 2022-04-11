@@ -30,6 +30,7 @@
                     </div>
                     <product-grid-vue
                         class="mt-12"
+                        :photoId="photo.id"
                         @selected="selectedProductId = $event"
                     />
                     <div class="sm:flex-col1 mt-10 flex">

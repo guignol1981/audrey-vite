@@ -1,8 +1,8 @@
 <template>
     <div class="relative">
-        <div class="fixed inset-x-0 -z-10 opacity-20">
+        <!-- <div class="fixed inset-x-0 -z-10 opacity-20">
             <img src="@/assets/wave1.svg" class="mt-12 w-full" alt="" />
-        </div>
+        </div> -->
         <section
             class="relative mx-auto max-w-full px-2 py-12 md:max-w-2xl lg:max-w-5xl"
         >

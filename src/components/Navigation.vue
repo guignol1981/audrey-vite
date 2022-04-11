@@ -1,5 +1,5 @@
 <template>
-    <div class="z-20 bg-white shadow-md md:sticky md:top-0">
+    <div class="z-20 bg-white py-2 shadow-md md:sticky md:top-0">
         <div class="relative lg:hidden">
             <img
                 v-if="$route.name === 'portfolio'"
@@ -22,41 +22,31 @@
         <div
             class="hidden items-center justify-between space-x-6 px-8 py-2 lg:flex"
         >
-            <div class="flex items-center justify-between space-x-6">
-                <a
-                    href="#"
-                    @click.prevent="$router.push({ name: 'portfolio' })"
-                    class="flex scale-75 items-center space-x-6 xl:scale-100"
-                >
-                    <img
-                        v-if="$route.name === 'portfolio'"
-                        class="h-32 w-32"
-                        src="@/assets/logo-vert.png"
-                        alt=""
-                    />
-                    <img
-                        v-else-if="$route.name === 'boutique'"
-                        class="h-32 w-32"
-                        src="@/assets/logo-jaune.png"
-                        alt=""
-                    />
-                    <img
-                        v-else
-                        class="h-32 w-32"
-                        src="@/assets/logo-bleu.png"
-                        alt=""
-                    />
-                    <div class="flex flex-col space-y-3">
-                        <span
-                            class="font-serif text-4xl font-medium uppercase tracking-widest text-gray-700"
-                            >Audrey Mainguy</span
-                        >
-                        <span
-                            class="text-center font-sans text-xl uppercase tracking-widest text-gray-500"
-                            >photographe</span
-                        >
-                    </div>
-                </a>
+            <a
+                href="#"
+                @click.prevent="$router.push({ name: 'portfolio' })"
+                class="flex shrink-0 scale-75 items-center space-x-6 xl:scale-100"
+            >
+                <img
+                    v-if="$route.name === 'portfolio'"
+                    class="w-[30rem]"
+                    src="@/assets/stacked-logo-vert-crop.png"
+                    alt=""
+                />
+                <img
+                    v-else-if="$route.name === 'boutique'"
+                    class="w-[30rem]"
+                    src="@/assets/stacked-logo-jaune-crop.png"
+                    alt=""
+                />
+                <img
+                    v-else
+                    class="w-[30rem]"
+                    src="@/assets/stacked-logo-bleu-crop.png"
+                    alt=""
+                />
+            </a>
+            <div class="flex items-center space-x-8">
                 <nav class="">
                     <ul
                         class="ml-4 flex space-x-5 whitespace-nowrap text-xl text-gray-800"
@@ -77,8 +67,6 @@
                         </li>
                     </ul>
                 </nav>
-            </div>
-            <div class="">
                 <a href="#">
                     <ShoppingBagIcon
                         class="h-10 w-10 text-gray-700 hover:text-gray-900"
@@ -108,7 +96,7 @@ export default {
             { name: 'Boutique', routeName: RoutesNames.Boutique },
             { name: 'Services & Tarifs', routeName: RoutesNames.Services },
             { name: 'Atelier', routeName: '' },
-            { name: 'À propos', routeName: '' },
+            { name: 'À propos', routeName: RoutesNames.About },
             { name: 'Contact', routeName: '' },
         ];
 

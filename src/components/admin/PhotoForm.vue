@@ -101,7 +101,29 @@
                     </div>
                 </div>
             </div>
-             <div v-if="photo.service">
+            <div v-if="photo.boutique">
+                <label
+                    for="collection"
+                    class="block text-sm font-medium text-gray-700"
+                    >Collection</label
+                >
+
+                <select
+                    name="collection"
+                    id="collection"
+                    v-model="photo.collectionId"
+                    class="w-full rounded-md py-2 px-3"
+                >
+                    <option
+                        v-for="collection in collections"
+                        :key="collection.id"
+                        :value="collection.id"
+                    >
+                        {{ collection.name }}
+                    </option>
+                </select>
+            </div>
+            <div v-if="photo.service">
                 <label
                     for="service"
                     class="block text-sm font-medium text-gray-700"
@@ -246,6 +268,7 @@ export default {
         const db = getFirestore();
         const store = useStore();
         const services = ref(store.state.services);
+        const collections = ref(store.state.collections);
 
         const cantSubmit = () => {
             return (
@@ -263,6 +286,8 @@ export default {
             try {
                 if (props.id) {
                     const docRef = doc(db, 'photos', props.id);
+
+    console.log(photo.value)
 
                     await updateDoc(
                         docRef,
@@ -344,6 +369,7 @@ export default {
             orientations,
             loading,
             services,
+            collections,
         };
     },
 };

@@ -28,7 +28,21 @@ export default new Vuex.Store({
             return state.photos.filter((p) => p.boutique);
         },
         filteredBoutique: (state: AppState): AppPhoto[] => {
-            return state.photos.filter((p) => p.boutique);
+            let boutique = state.photos.filter((p) => p.boutique);
+
+            if (state.filters.collection) {
+                boutique = boutique.filter(
+                    (p) => p.collectionId === state.filters.collection
+                );
+            }
+
+            if (!state.filters.tags.length) return boutique;
+
+            boutique = boutique.filter((p) =>
+                p.tags.some((t) => state.filters.tags.includes(t))
+            );
+
+            return boutique;
         },
         tagGroups: (state: AppState): string[] => {
             return [...new Set(state.tags.map((t) => t.group))];
@@ -48,7 +62,7 @@ export default new Vuex.Store({
             state.collections = [...collections];
         },
         filters(state, filters: AppFilters): void {
-            state.filters = filters;
+            state.filters = { ...filters };
         },
         products(state, products: any): void {
             state.products = [...products];

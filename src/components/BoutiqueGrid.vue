@@ -1,20 +1,26 @@
 <template>
+    <div v-if="!photos.length" class="grid place-content-center py-12">
+        <empty-list-vue />
+    </div>
     <div
-        class="grid grid-cols-2 items-end space-y-16 md:grid-cols-4 lg:grid-cols-6"
+        v-else
+        class="flex flex-wrap items-end justify-between gap-4 space-y-8"
     >
         <a
             v-for="(photo, i) in photos"
             :key="i"
             href="#"
-            class="group relative px-4"
+            :class="['group relative']"
             @click.prevent="photoQuickviewId = photo.id"
         >
             <boutique-card-vue
-                class="'transition group-hover:-translate-y-8 group-hover:scale-105 group-hover:shadow-md"
+                :class="[
+                    'transition group-hover:-translate-y-8 group-hover:scale-105 group-hover:shadow-md',
+                ]"
                 :photo="photo"
             />
             <div
-                class="absolute inset-x-0 -bottom-1 h-4 bg-[url('@/assets/wood.png')] bg-cover bg-center bg-no-repeat shadow-md"
+                class="absolute inset-x-0 -bottom-1 h-4 w-full bg-[url('@/assets/wood.png')] bg-cover bg-center bg-no-repeat shadow-md"
             ></div>
         </a>
     </div>
@@ -30,12 +36,14 @@ import ModalVue from './Modal.vue';
 import QuickviewVue from './Quickview.vue';
 import BoutiqueCardVue from './BoutiqueCard.vue';
 import { computed } from '@vue/runtime-core';
+import EmptyListVue from './EmptyList.vue';
 
 export default {
     components: {
         ModalVue,
         QuickviewVue,
         BoutiqueCardVue,
+        EmptyListVue,
     },
     setup() {
         const store = useStore();
