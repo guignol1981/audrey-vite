@@ -1,6 +1,6 @@
 '
 <template>
-    <div class="bg-blue-logo/5">
+    <div class="bg-gray">
         <h2 class="sr-only">Faites affaire en confiance</h2>
         <div class="mx-auto max-w-7xl py-16 sm:px-2 lg:px-4">
             <div
@@ -14,7 +14,7 @@
                     <div class="mx-auto">
                         <component
                             :is="incentive.icon"
-                            class="h-12 w-12 fill-blue-logo stroke-black"
+                            class="h-12 w-12 stroke-black"
                         />
                     </div>
                     <div class="mt-3 sm:mt-0 sm:ml-3">

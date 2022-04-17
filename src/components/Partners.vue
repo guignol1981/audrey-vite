@@ -1,6 +1,6 @@
 <template>
     <div
-        class="relative bg-gray-500 py-20 px-12 text-justify leading-8 text-white"
+        class="relative bg-blue-logo py-20 px-12 text-justify text-xl leading-8 text-white"
     >
         <p>
             Tourisme Kamouraska ǀ Tourisme Bas-Saint-Laurent ǀ Le Québec

@@ -6,6 +6,7 @@
         xmlns:xlink="http://www.w3.org/1999/xlink"
         x="0px"
         y="0px"
+        class="fill-blue-logo stroke-blue-logo"
         width="418.497px"
         height="418.497px"
         viewBox="0 0 418.497 418.497"
