@@ -70,11 +70,11 @@ const routes: RouteRecordRaw[] = [
                 name: RoutesNames.AdminCollections,
                 component: AdminCollection,
             },
-            {
-                path: '/:pathMatch(.*)*',
-                redirect: 'photos',
-            },
         ],
+    },
+    {
+        path: '/:pathMatch(.*)*',
+        redirect: 'portfolio',
     },
 ];
 

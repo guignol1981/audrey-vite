@@ -4,7 +4,7 @@
     </div>
     <div
         v-else
-        class="flex flex-wrap items-end justify-between gap-4 space-y-8"
+        class="grid grid-cols-1 items-end space-y-12 md:grid-cols-2 md:space-y-48 lg:grid-cols-4"
     >
         <a
             v-for="(photo, i) in photos"
@@ -15,7 +15,7 @@
         >
             <boutique-card-vue
                 :class="[
-                    'transition group-hover:-translate-y-8 group-hover:scale-105 group-hover:shadow-md',
+                    'px-8 transition group-hover:-translate-y-6 group-hover:scale-105',
                 ]"
                 :photo="photo"
             />

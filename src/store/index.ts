@@ -2,6 +2,7 @@ import { collection, getDocs, getFirestore, query } from 'firebase/firestore';
 import Vuex, { ActionContext } from 'vuex';
 import AppCollection from '../models/collection';
 import AppFilters from '../models/filters';
+import AppMedia from '../models/media';
 import {
     AppPhoto,
     AppPhotoDataConverter,
@@ -61,6 +62,9 @@ export default new Vuex.Store({
         collections(state, collections): void {
             state.collections = [...collections];
         },
+        medias(state, medias): void {
+            state.medias = [...medias];
+        },
         filters(state, filters: AppFilters): void {
             state.filters = { ...filters };
         },
@@ -85,6 +89,21 @@ export default new Vuex.Store({
             });
 
             context.commit('photos', photos);
+        },
+        async loadMedias(
+            context: ActionContext<AppState, AppState>
+        ): Promise<void> {
+            const db = getFirestore();
+            const medias: AppMedia[] = [];
+            const q = query(collection(db, 'medias').withConverter(AppMedia));
+
+            const qSnap = await getDocs(q);
+
+            qSnap.forEach((docSnap) => {
+                medias.push(docSnap.data());
+            });
+
+            context.commit('medias', medias);
         },
         async loadProducts(
             context: ActionContext<AppState, AppState>

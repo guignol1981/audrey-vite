@@ -27,8 +27,8 @@ export default class AppMedia {
     public static toFirestore(media: AppMedia): DocumentData {
         const copy = { ...media };
 
-        delete media.id;
+        delete copy.id;
 
-        return copy;
+        return { ...copy };
     }
 }

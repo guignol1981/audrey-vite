@@ -1,7 +1,7 @@
 <template>
-    <div class="bg-blue-logo px-8 py-12 text-blue-200">
+    <div class="paper rotate-1 bg-gray-200 px-8 py-12 text-gray-800">
         <div class="mt-10 space-y-5">
-            <p class="text-base leading-7">
+            <p class="text-base leading-7 text-gray-900">
                 Le Kamouraska est ma région d’adoption depuis plus de 15 ans! Je
                 suis installée à Saint-André-de-Kamouraska, j’offre mes services
                 comme photographe dans le Bas-Saint-Laurent et j’ai un
@@ -9,8 +9,8 @@
                 niveau des paysages.
             </p>
             <div class="">
-                <p class="font-medium">
-                    Les 4 volets importants dans ma démarche artistique :
+                <p class="text-xl font-medium">
+                    Les 4 volets importants dans ma démarche artistique
                 </p>
                 <ul class="space-y-4 px-2 py-4 text-left text-gray-700">
                     <li class="flex gap-1">
@@ -60,7 +60,7 @@
 
         <div class="absolute inset-x-0 top-0 -translate-y-1/2">
             <div
-                class="mx-auto h-20 w-32 bg-yellow-300/20 backdrop-blur-sm"
+                class="mx-auto h-20 w-32 bg-yellow-300/10 backdrop-blur-sm"
             ></div>
         </div>
     </div>
@@ -75,3 +75,9 @@ export default {
     setup() {},
 };
 </script>
+
+<style scoped>
+.paper {
+    box-shadow: 4px 4px 4px 0px #80808082;
+}
+</style>

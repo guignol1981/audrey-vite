@@ -7,6 +7,7 @@
                 : 'aspect-[2/3] h-48',
             ' bg-yellow-logo/40',
         ]"
+        :imgClasses="['shadow-md']"
     >
     </lazy-photo-vue>
 </template>

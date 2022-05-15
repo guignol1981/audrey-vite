@@ -158,9 +158,9 @@ export default {
             loading.value = true;
 
             if (props.id) {
-                await updateDoc(doc(db, 'medias', props.id), {
-                    ...media.value,
-                });
+                const docRef = doc(db, 'medias', props.id);
+
+                await setDoc(docRef, { ...media.value });
             } else {
                 await addDoc(
                     collection(db, 'medias').withConverter(AppMedia),

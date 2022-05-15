@@ -10,5 +10,6 @@ await store.dispatch('loadTags');
 await store.dispatch('loadServices');
 await store.dispatch('loadProducts');
 await store.dispatch('loadCollections');
+await store.dispatch('loadMedias');
 
 createApp(App).use(router).use(store).mount('#app');
