@@ -1,16 +1,19 @@
 <template>
-    <div class="relative">
-        <div class="polaroid relative -rotate-3 bg-gray-200 p-4 pb-24">
-            <img src="@/assets/audrey.jpg" alt="" />
-            <div class="absolute inset-x-0 top-0 -translate-y-1/2">
-                <div
-                    class="mx-auto h-20 w-32 bg-red-300/30 backdrop-blur-sm"
-                ></div>
-            </div>
-        </div>
+    <div class="group relative aspect-square">
         <div
-            class="polaroid absolute inset-0 -z-10 w-full rotate-3 bg-gray-200"
+            class="polaroid absolute inset-0 rotate-3 bg-red-400 transition group-hover:rotate-0"
         ></div>
+        <div
+            class="polaroid absolute inset-0 -rotate-2 bg-blue-200 transition group-hover:rotate-1"
+        ></div>
+        <div
+            class="polaroid relative inset-0 bg-gray-200 p-4 transition group-hover:rotate-2"
+        >
+            <img src="@/assets/audrey.jpg" alt="" />
+            <p class="flex w-full justify-center py-12 text-3xl text-gray-600">
+                Audrey Mainguy
+            </p>
+        </div>
     </div>
 </template>
 
