@@ -1,23 +1,138 @@
 <template>
     <div
-        class="relative border-2 bg-blue-logo py-20 px-12 text-justify text-xl leading-8 text-[hsl(186deg_69%_70%)]"
+        class="relative border-2 bg-blue-logo py-20 px-2 text-justify text-xl leading-8 text-[hsl(186deg_69%_70%)]"
     >
         <div class="overflow-x-hidden">
             <span class="scroll text-3xl">
-                Tourisme Kamouraska ǀ Tourisme Bas-Saint-Laurent ǀ Le Québec
-                Maritime ǀ Tourisme Rivière-du-Loup ǀ MRC de Rivière-du-Loup ǀ
-                Municipalité de Saint-André-de-Kamouraska ǀ COSMOSS ǀ Musée du
-                Bas-Saint-Laurent ǀ Auberge le 112 ǀ Camping de Rivière-Ouelle ǀ
-                Camping de l’Île Verte ǀ Pourvoirie des Trois-Lacs ǀ Vignoble
-                Amouraska ǀ Atelier VCuir inc ǀ Atelier Vitalis ǀ Le Tenon et la
-                Mortaise ǀ ITAQ La Pocatière ǀ Municipalité de l’Île Verte ǀ
-                Parc côtier Kiskotuk ǀ Maison culturelle Armand-Vaillancourt ǀ
-                École Michaud ǀ Premier Tech ǀ Municipalité de
-                Notre-Dame-du-Portage ǀ Première Nation Wolastoqiyik Wahsipekuk
-                ǀ La Belle Antiquaire ǀ Le Dep du village ǀ Courtiers
-                immobiliers ǀ Cotillon céramique ǀ Marie-Eve Blanchard autrice ǀ
-                Marie-Pierre Bérubé autrice ǀ Sports Experts ǀ Magazine
-                Continuité ǀ Berger
+                Tourisme Kamouraska
+                <span
+                    class="inline-block h-5 w-5 rounded-full bg-[hsl(186deg_69%_90%)]"
+                ></span>
+                Tourisme Bas-Saint-Laurent
+                <span
+                    class="inline-block h-5 w-5 rounded-full bg-[hsl(186deg_69%_90%)]"
+                ></span>
+                Le Québec Maritime
+                <span
+                    class="inline-block h-5 w-5 rounded-full bg-[hsl(186deg_69%_90%)]"
+                ></span>
+                Tourisme Rivière-du-Loup
+                <span
+                    class="inline-block h-5 w-5 rounded-full bg-[hsl(186deg_69%_90%)]"
+                ></span>
+                MRC de Rivière-du-Loup
+                <span
+                    class="inline-block h-5 w-5 rounded-full bg-[hsl(186deg_69%_90%)]"
+                ></span>
+                Municipalité de Saint-André-de-Kamouraska
+                <span
+                    class="inline-block h-5 w-5 rounded-full bg-[hsl(186deg_69%_90%)]"
+                ></span>
+                COSMOSS
+                <span
+                    class="inline-block h-5 w-5 rounded-full bg-[hsl(186deg_69%_90%)]"
+                ></span>
+                Musée du Bas-Saint-Laurent
+                <span
+                    class="inline-block h-5 w-5 rounded-full bg-[hsl(186deg_69%_90%)]"
+                ></span>
+                Auberge le 112
+                <span
+                    class="inline-block h-5 w-5 rounded-full bg-[hsl(186deg_69%_90%)]"
+                ></span>
+                Camping de Rivière-Ouelle
+                <span
+                    class="inline-block h-5 w-5 rounded-full bg-[hsl(186deg_69%_90%)]"
+                ></span>
+                Camping de l’Île Verte
+                <span
+                    class="inline-block h-5 w-5 rounded-full bg-[hsl(186deg_69%_90%)]"
+                ></span>
+                Pourvoirie des Trois-Lacs
+                <span
+                    class="inline-block h-5 w-5 rounded-full bg-[hsl(186deg_69%_90%)]"
+                ></span>
+                Vignoble Amouraska
+                <span
+                    class="inline-block h-5 w-5 rounded-full bg-[hsl(186deg_69%_90%)]"
+                ></span>
+                Atelier VCuir inc
+                <span
+                    class="inline-block h-5 w-5 rounded-full bg-[hsl(186deg_69%_90%)]"
+                ></span>
+                Atelier Vitalis
+                <span
+                    class="inline-block h-5 w-5 rounded-full bg-[hsl(186deg_69%_90%)]"
+                ></span>
+                Le Tenon et la Mortaise
+                <span
+                    class="inline-block h-5 w-5 rounded-full bg-[hsl(186deg_69%_90%)]"
+                ></span>
+                ITAQ La Pocatière
+                <span
+                    class="inline-block h-5 w-5 rounded-full bg-[hsl(186deg_69%_90%)]"
+                ></span>
+                Municipalité de l’Île Verte
+                <span
+                    class="inline-block h-5 w-5 rounded-full bg-[hsl(186deg_69%_90%)]"
+                ></span>
+                Parc côtier Kiskotuk
+                <span
+                    class="inline-block h-5 w-5 rounded-full bg-[hsl(186deg_69%_90%)]"
+                ></span>
+                Maison culturelle Armand-Vaillancourt
+                <span
+                    class="inline-block h-5 w-5 rounded-full bg-[hsl(186deg_69%_90%)]"
+                ></span>
+                École Michaud
+                <span
+                    class="inline-block h-5 w-5 rounded-full bg-[hsl(186deg_69%_90%)]"
+                ></span>
+                Premier Tech
+                <span
+                    class="inline-block h-5 w-5 rounded-full bg-[hsl(186deg_69%_90%)]"
+                ></span>
+                Municipalité de Notre-Dame-du-Portage
+                <span
+                    class="inline-block h-5 w-5 rounded-full bg-[hsl(186deg_69%_90%)]"
+                ></span>
+                Première Nation Wolastoqiyik Wahsipekuk
+                <span
+                    class="inline-block h-5 w-5 rounded-full bg-[hsl(186deg_69%_90%)]"
+                ></span>
+                La Belle Antiquaire
+                <span
+                    class="inline-block h-5 w-5 rounded-full bg-[hsl(186deg_69%_90%)]"
+                ></span>
+                Le Dep du village
+                <span
+                    class="inline-block h-5 w-5 rounded-full bg-[hsl(186deg_69%_90%)]"
+                ></span>
+                Courtiers immobiliers
+                <span
+                    class="inline-block h-5 w-5 rounded-full bg-[hsl(186deg_69%_90%)]"
+                ></span>
+                Cotillon céramique
+                <span
+                    class="inline-block h-5 w-5 rounded-full bg-[hsl(186deg_69%_90%)]"
+                ></span>
+                Marie-Eve Blanchard autrice
+                <span
+                    class="inline-block h-5 w-5 rounded-full bg-[hsl(186deg_69%_90%)]"
+                ></span>
+                Marie-Pierre Bérubé autrice
+                <span
+                    class="inline-block h-5 w-5 rounded-full bg-[hsl(186deg_69%_90%)]"
+                ></span>
+                Sports Experts
+                <span
+                    class="inline-block h-5 w-5 rounded-full bg-[hsl(186deg_69%_90%)]"
+                ></span>
+                Magazine Continuité
+                <span
+                    class="inline-block h-5 w-5 rounded-full bg-[hsl(186deg_69%_90%)]"
+                ></span>
+                Berger
             </span>
         </div>
         <div
