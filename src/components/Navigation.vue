@@ -1,50 +1,72 @@
 <template>
-    <div class="z-20 bg-white py-2 shadow-md md:sticky md:top-0">
-        <div class="relative lg:hidden">
+    <div class="z-20 bg-white py-2 shadow-md transition md:sticky md:top-0">
+        <a
+            class="relative flex justify-center lg:hidden"
+            href="#"
+            @click.prevent="$router.push({ name: 'portfolio' })"
+        >
             <img
                 v-if="$route.name === 'portfolio'"
-                src="@/assets/stacked-logo-vert.png"
+                src="@/assets/logo-2.svg"
                 alt=""
+                :class="[scrolled ? 'w-1/2' : '']"
             />
             <img
                 v-else-if="$route.name === 'boutique'"
-                src="@/assets/stacked-logo-jaune.png"
+                src="@/assets/logo-1.svg"
+                :class="[scrolled ? 'w-1/2' : '']"
                 alt=""
             />
-            <img v-else src="@/assets/stacked-logo-bleu.png" alt="" />
+            <img
+                v-else
+                src="@/assets/logo-3.svg"
+                alt=""
+                :class="[scrolled ? 'w-1/2' : '']"
+            />
             <button
-                class="fixed top-3 right-3 z-20 h-10 w-10 rounded-full bg-white p-2 text-gray-700 shadow-md hover:text-gray-800"
-                @click="mobileRef.show()"
+                class="fixed top-3 right-3 z-50 h-10 w-10 rounded-full bg-white p-2 text-gray-700 shadow-md hover:text-gray-800"
+                @click="mobileRef.toggle()"
             >
                 <MenuIcon />
             </button>
-        </div>
-        <div
-            class="hidden items-center justify-between space-x-6 px-8 py-2 lg:flex"
-        >
+        </a>
+        <div class="hidden items-center justify-between space-x-6 px-8 lg:flex">
             <a
                 href="#"
                 @click.prevent="$router.push({ name: 'portfolio' })"
                 class="flex shrink-0 scale-75 items-center space-x-6 xl:scale-100"
             >
                 <img
-                    v-if="$route.name === 'portfolio'"
+                    v-if="$route.name === 'portfolio' && !scrolled"
                     class="w-[30rem]"
-                    src="@/assets/stacked-logo-vert-crop.png"
+                    src="@/assets/logo-2.svg"
                     alt=""
                 />
                 <img
-                    v-else-if="$route.name === 'boutique'"
-                    class="w-[30rem]"
-                    src="@/assets/stacked-logo-jaune-crop.png"
+                    v-else-if="$route.name === 'portfolio' && scrolled"
+                    class="w-24"
+                    src="@/assets/logo-vert.png"
                     alt=""
                 />
                 <img
-                    v-else
+                    v-else-if="$route.name === 'boutique' && !scrolled"
                     class="w-[30rem]"
-                    src="@/assets/stacked-logo-bleu-crop.png"
+                    src="@/assets/logo-1.svg"
                     alt=""
                 />
+                <img
+                    v-else-if="$route.name === 'boutique' && scrolled"
+                    class="w-24"
+                    src="@/assets/logo-jaune.png"
+                    alt=""
+                />
+                <img
+                    v-else-if="!scrolled"
+                    class="w-[30rem]"
+                    src="@/assets/logo-3.svg"
+                    alt=""
+                />
+                <img v-else class="w-24" src="@/assets/logo-bleu.png" alt="" />
             </a>
             <div class="flex items-center space-x-8">
                 <nav class="">
@@ -60,7 +82,8 @@
                                     : '',
                             ]"
                             @click.prevent="
-                                $router.push({ name: link.routeName })
+                                $router.push({ name: link.routeName });
+                                open = false;
                             "
                         >
                             <a href=""> {{ link.name }}</a>
@@ -100,10 +123,33 @@ export default {
             { name: 'Contact', routeName: '' },
         ];
 
+        window.onscroll = function () {
+            scrollFunction();
+        };
+
+        const scrolled = ref(false);
+
+        function scrollFunction() {
+            if (scrolled.value) {
+                if (document.documentElement.scrollTop === 0) {
+                    scrolled.value = false;
+                } else {
+                    scrolled.value = true;
+                }
+            } else {
+                if (document.documentElement.scrollTop > 150) {
+                    scrolled.value = true;
+                } else {
+                    scrolled.value = false;
+                }
+            }
+        }
+
         const showNav = ref(false);
         const mobileRef = ref(null);
 
         return {
+            scrolled,
             links,
             showNav,
             mobileRef,

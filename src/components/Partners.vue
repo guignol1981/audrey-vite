@@ -1,6 +1,6 @@
 <template>
     <div
-        class="relative border-2 bg-blue-logo py-20 px-2 text-justify text-xl leading-8 text-[hsl(186deg_69%_70%)]"
+        class="relative border-2 bg-gradient-to-tr from-blue-logo/80 to-blue-logo py-20 px-2 text-justify text-xl leading-8 text-[hsl(186deg_69%_70%)]"
     >
         <div class="overflow-x-hidden">
             <span class="scroll text-3xl">

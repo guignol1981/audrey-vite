@@ -2,7 +2,7 @@
     <TransitionRoot as="Template" :show="open">
         <Dialog
             as="div"
-            class="fixed inset-0 overflow-hidden"
+            class="fixed inset-0 z-30 overflow-hidden"
             @close="open = false"
         >
             <div class="absolute inset-0 overflow-hidden">
@@ -17,6 +17,7 @@
                 >
                     <DialogOverlay
                         class="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+                        @click.stop="open = false"
                     />
                 </TransitionChild>
                 <div class="fixed inset-y-0 right-0 flex max-w-full">
@@ -44,7 +45,8 @@
                                         @click.prevent="
                                             $router.push({
                                                 name: link.routeName,
-                                            })
+                                            });
+                                            open = false;
                                         "
                                     >
                                         <a href="#">{{ link.name }}</a>
@@ -93,8 +95,8 @@ export default {
         return { open };
     },
     methods: {
-        show() {
-            open.value = true;
+        toggle() {
+            open.value = !open.value;
         },
     },
 };
