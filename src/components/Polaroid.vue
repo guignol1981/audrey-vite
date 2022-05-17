@@ -1,10 +1,10 @@
 <template>
     <div class="group relative aspect-square">
         <div
-            class="polaroid absolute inset-0 rotate-3 bg-red-400 transition group-hover:rotate-0"
+            class="polaroid absolute inset-0 -mt-4 bg-red-400 transition group-hover:rotate-0 lg:mt-0 lg:rotate-3"
         ></div>
         <div
-            class="polaroid absolute inset-0 -rotate-2 bg-blue-200 transition group-hover:rotate-1"
+            class="polaroid absolute inset-0 -mt-2 bg-blue-200 transition group-hover:rotate-1 lg:mt-0 lg:-rotate-2"
         ></div>
         <div
             class="polaroid relative inset-0 bg-gray-200 p-4 transition group-hover:rotate-2"

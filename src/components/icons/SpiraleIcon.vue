@@ -7,8 +7,6 @@
         x="0px"
         y="0px"
         class="fill-blue-logo stroke-blue-logo"
-        width="418.497px"
-        height="418.497px"
         viewBox="0 0 418.497 418.497"
         style="enable-background: new 0 0 418.497 418.497"
         xml:space="preserve"

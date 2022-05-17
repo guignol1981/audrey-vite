@@ -3,7 +3,7 @@
         <div class="relative grid grid-cols-1 lg:grid-cols-2">
             <div class="p-6 lg:p-24"><polaroid-vue /></div>
 
-            <div class="relative p-6 lg:p-24">
+            <div class="relative p-6 lg:p-12">
                 <about-card-vue />
             </div>
         </div>
