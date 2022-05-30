@@ -52,10 +52,6 @@
                                         <a href="#">{{ link.name }}</a>
                                     </li>
                                 </ul>
-                                <hr class="my-4 divide-y-4" />
-                                <div class="flex">
-                                    <ShoppingBagIcon class="h-10 w-10" />
-                                </div>
                             </div>
                         </div>
                     </TransitionChild>

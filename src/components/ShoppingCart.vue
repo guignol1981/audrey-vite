@@ -3,8 +3,11 @@
     <TransitionRoot as="template" :show="open">
         <Dialog
             as="div"
-            class="fixed inset-0 overflow-hidden"
-            @close="open = false"
+            class="fixed inset-0 z-50 overflow-hidden"
+            @close="
+                $emit('close');
+                open = false;
+            "
         >
             <div class="absolute inset-0 overflow-hidden">
                 <TransitionChild
@@ -46,7 +49,7 @@
                                         <DialogTitle
                                             class="text-lg font-medium text-gray-900"
                                         >
-                                            Shopping cart
+                                            Votre panier
                                         </DialogTitle>
                                         <div class="ml-3 flex h-7 items-center">
                                             <button
@@ -72,8 +75,10 @@
                                                 class="-my-6 divide-y divide-gray-200"
                                             >
                                                 <li
-                                                    v-for="product in products"
-                                                    :key="product.id"
+                                                    v-for="(
+                                                        item, i
+                                                    ) in cartItems"
+                                                    :key="i"
                                                     class="flex py-6"
                                                 >
                                                     <div
@@ -81,10 +86,11 @@
                                                     >
                                                         <img
                                                             :src="
-                                                                product.imageSrc
-                                                            "
-                                                            :alt="
-                                                                product.imageAlt
+                                                                photos.find(
+                                                                    (p) =>
+                                                                        p.id ===
+                                                                        item.photoId
+                                                                ).photoUrl
                                                             "
                                                             class="h-full w-full object-cover object-center"
                                                         />
@@ -98,29 +104,46 @@
                                                                 class="flex justify-between text-base font-medium text-gray-900"
                                                             >
                                                                 <h3>
-                                                                    <a
-                                                                        :href="
-                                                                            product.href
-                                                                        "
-                                                                    >
+                                                                    <a href="#">
                                                                         {{
-                                                                            product.name
+                                                                            products.find(
+                                                                                (
+                                                                                    p
+                                                                                ) =>
+                                                                                    p.id ===
+                                                                                    item.productId
+                                                                            )
+                                                                                .name
                                                                         }}
                                                                     </a>
                                                                 </h3>
                                                                 <p class="ml-4">
                                                                     {{
-                                                                        product.price
+                                                                        products
+                                                                            .find(
+                                                                                (
+                                                                                    p
+                                                                                ) =>
+                                                                                    p.id ===
+                                                                                    item.productId
+                                                                            )
+                                                                            .prices.find(
+                                                                                (
+                                                                                    p
+                                                                                ) =>
+                                                                                    p.id ===
+                                                                                    item.priceId
+                                                                            )
                                                                     }}
                                                                 </p>
                                                             </div>
-                                                            <p
+                                                            <!-- <p
                                                                 class="mt-1 text-sm text-gray-500"
                                                             >
                                                                 {{
                                                                     product.color
                                                                 }}
-                                                            </p>
+                                                            </p> -->
                                                         </div>
                                                         <div
                                                             class="flex flex-1 items-end justify-between text-sm"
@@ -128,18 +151,20 @@
                                                             <p
                                                                 class="text-gray-500"
                                                             >
-                                                                Qty
-                                                                {{
-                                                                    product.quantity
-                                                                }}
+                                                                Quantité: 1
                                                             </p>
 
                                                             <div class="flex">
                                                                 <button
                                                                     type="button"
                                                                     class="font-medium text-indigo-600 hover:text-indigo-500"
+                                                                    @click="
+                                                                        removeItem(
+                                                                            item
+                                                                        )
+                                                                    "
                                                                 >
-                                                                    Remove
+                                                                    retirer
                                                                 </button>
                                                             </div>
                                                         </div>
@@ -166,21 +191,21 @@
                                     <div class="mt-6">
                                         <a
                                             href="#"
-                                            class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-                                            >Checkout</a
+                                            class="block flex w-full flex-1 justify-center rounded-md bg-blue-logo py-3 px-4 text-xl text-white ring-blue-logo/25 hover:scale-105 focus:ring-2 active:scale-100 sm:w-full"
+                                            >Passer à la caisse</a
                                         >
                                     </div>
                                     <div
                                         class="mt-6 flex justify-center text-center text-sm text-gray-500"
                                     >
                                         <p>
-                                            or
+                                            ou
                                             <button
                                                 type="button"
                                                 class="font-medium text-indigo-600 hover:text-indigo-500"
                                                 @click="open = false"
                                             >
-                                                Continue Shopping<span
+                                                Continuer à magasiner<span
                                                     aria-hidden="true"
                                                 >
                                                     &rarr;</span
@@ -199,7 +224,7 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import {
     Dialog,
     DialogOverlay,
@@ -208,34 +233,7 @@ import {
     TransitionRoot,
 } from '@headlessui/vue';
 import { XIcon } from '@heroicons/vue/outline';
-
-const products = [
-    {
-        id: 1,
-        name: 'Throwback Hip Bag',
-        href: '#',
-        color: 'Salmon',
-        price: '$90.00',
-        quantity: 1,
-        imageSrc:
-            'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg',
-        imageAlt:
-            'Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.',
-    },
-    {
-        id: 2,
-        name: 'Medium Stuff Satchel',
-        href: '#',
-        color: 'Blue',
-        price: '$32.00',
-        quantity: 1,
-        imageSrc:
-            'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
-        imageAlt:
-            'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
-    },
-    // More products...
-];
+import { useStore } from 'vuex';
 
 export default {
     components: {
@@ -246,12 +244,43 @@ export default {
         TransitionRoot,
         XIcon,
     },
-    setup() {
-        const open = ref(true);
+    props: {
+        propOpen: {
+            type: Boolean,
+            default: false,
+        },
+    },
+    setup(props) {
+        const store = useStore();
+        const open = ref(false);
+        const cartItems = computed(() => store.state.cartItems);
+        const photos = store.state.photos;
+        const products = store.state.products;
+
+        watch(
+            () => props.propOpen,
+            () => (open.value = props.propOpen),
+            { immediate: true }
+        );
+
+        const removeItem = (item) => {
+            const itemInList = cartItems.value.find(
+                (ci) =>
+                    ci.productId === item.productId &&
+                    ci.photoId === item.photoId &&
+                    ci.priceId === item.priceId
+            );
+            cartItems.value.splice(cartItems.value.indexOf(itemInList), 1);
+
+            store.commit('cartItems', cartItems.value);
+        };
 
         return {
-            products,
             open,
+            cartItems,
+            photos,
+            removeItem,
+            products,
         };
     },
 };

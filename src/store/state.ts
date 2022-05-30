@@ -1,3 +1,4 @@
+import { AppCartItem } from '../models/cart';
 import AppCollection from '../models/collection';
 import AppFilters from '../models/filters';
 import AppMedia from '../models/media';
@@ -12,4 +13,5 @@ export default class AppState {
     public filters: AppFilters = new AppFilters();
     public medias: AppMedia[] = [];
     public products: any = [];
+    public cartItems: AppCartItem[] = [];
 }

@@ -1,7 +1,6 @@
 '
 <template>
     <div class="bg-gray">
-        <h2 class="sr-only">Faites affaire en confiance</h2>
         <div class="mx-auto max-w-7xl py-16 sm:px-2 lg:px-4">
             <div
                 class="mx-auto grid max-w-2xl grid-cols-1 gap-y-12 gap-x-8 px-4 lg:max-w-none lg:grid-cols-3 lg:gap-y-16"
@@ -9,7 +8,10 @@
                 <div
                     v-for="incentive in incentives"
                     :key="incentive.title"
-                    class="flex-col items-center space-y-5 sm:flex"
+                    :class="[
+                        'relative flex-col items-center  space-y-5 rounded-md border py-5 px-2 transition hover:scale-105 hover:shadow-md sm:flex',
+                        incentive.color,
+                    ]"
                 >
                     <div class="mx-auto">
                         <component
@@ -47,16 +49,19 @@ export default {
                 title: 'Fait au Québec',
                 description: `En plus d'encourager une artiste du Québec, mes impressions sont effectués localement par des gens d'ici.`,
                 icon: QuebecIconVue,
+                color: 'border-blue-logo',
             },
             {
                 title: 'Épargnez sur la livraison',
                 description: `Livraison gratuite pour toute commande de 200,00$+`,
                 icon: CoinIconVue,
+                color: 'border-yellow-logo',
             },
             {
                 title: 'Satisfaction garantie',
                 description: `Si vous n'êtes pas entièrement satisait(e) de votre achat, vous aurez la possibilité d'échanger pour un autre produit de même valeur.`,
                 icon: WarrantyVue,
+                color: 'border-green-logo',
             },
         ];
 

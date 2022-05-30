@@ -15,7 +15,7 @@
                     class="mt-10 flex flex-col items-start px-4 sm:mt-16 sm:px-0 lg:mt-0"
                 >
                     <h1
-                        class="text-3xl font-extrabold tracking-tight text-gray-900"
+                        class="text-3xl font-light tracking-tight text-gray-900"
                     >
                         {{ photo.title }}
                     </h1>
@@ -32,6 +32,7 @@
                         class="mt-12"
                         :photoId="photo.id"
                         @selected="selectedProductId = $event"
+                        @selected-price="selectedPriceId = $event"
                     />
                     <div class="sm:flex-col1 mt-10 flex">
                         <button
@@ -81,6 +82,7 @@ import ProductGridVue from './ProductGrid.vue';
 import IncentivesVue from './Incentives.vue';
 import RoomMockupVue from './RoomMockup.vue';
 import CarousselVue from './Caroussel.vue';
+import { AppCartItem } from '../models/cart';
 
 export default {
     components: {
@@ -111,17 +113,46 @@ export default {
         const photo = store.state.photos.find((p) => p.id === props.photoId);
         const products = computed(() => store.state.products);
         const selectedProductId = ref(products.value[0].id);
+        const selectPriceId = ref(null);
+        const cartItems = computed(() => store.state.cartItems);
 
-        const toggleItemInCart = () => {};
+        const toggleItemInCart = () => {
+            const itemInList = cartItems.value.find(
+                (ci) =>
+                    ci.productId === selectedProductId &&
+                    ci.photoId === photo.id &&
+                    ci.priceId === selectPriceId
+            );
 
-        const isInCart = ref(false);
+            if (itemInList) {
+                cartItems.value.splice(cartItems.value.indexOf(itemInList), 1);
+            } else {
+                cartItems.value.push({
+                    productId: selectedProductId.value,
+                    photoId: photo.id,
+                    priceId: selectPriceId.value,
+                });
+            }
+            store.commit('cartItems', cartItems.value);
+        };
+
+        const isInCart = computed(() => {
+            return !!cartItems.value.find(
+                (ci) =>
+                    ci.productId === selectedProductId &&
+                    ci.photoId === photo.id &&
+                    ci.priceId === selectPriceId
+            );
+        });
 
         return {
             isInCart,
             products,
             selectedProductId,
+            selectPriceId,
             photo,
             toggleItemInCart,
+            cartItems,
         };
     },
 };

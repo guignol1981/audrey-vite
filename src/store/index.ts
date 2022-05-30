@@ -1,5 +1,6 @@
 import { collection, getDocs, getFirestore, query } from 'firebase/firestore';
 import Vuex, { ActionContext } from 'vuex';
+import { AppCartItem } from '../models/cart';
 import AppCollection from '../models/collection';
 import AppFilters from '../models/filters';
 import AppMedia from '../models/media';
@@ -70,6 +71,12 @@ export default new Vuex.Store({
         },
         products(state, products: any): void {
             state.products = [...products];
+        },
+        cartItems(state, cartItems: AppCartItem[]): void {
+            state.cartItems = [...cartItems];
+        },
+        scrollY(state, scrollY: number): void {
+            state.scrollY = scrollY;
         },
     },
     actions: {

@@ -96,7 +96,7 @@ export default {
             required: true,
         },
     },
-    setup(props) {
+    setup(props, { emit }) {
         const store = useStore();
         const photo = store.state.photos.find((p) => p.id === props.photoId);
         const products = computed(() =>
@@ -108,6 +108,11 @@ export default {
 
         const selectedPrice = ref(
             products.value.find((p) => p.id === selection.value).prices[0].id
+        );
+
+        watch(
+            () => selectedPrice.value,
+            () => emit('selected-price', selectedPrice.value)
         );
 
         watch(
