@@ -287,7 +287,7 @@ export default {
                 if (props.id) {
                     const docRef = doc(db, 'photos', props.id);
 
-    console.log(photo.value)
+                    console.log(photo.value);
 
                     await updateDoc(
                         docRef,

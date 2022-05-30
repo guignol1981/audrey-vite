@@ -5,11 +5,15 @@ import './firebase';
 import router from './router';
 import store from './store';
 
-await store.dispatch('loadPhotos');
-await store.dispatch('loadTags');
-await store.dispatch('loadServices');
-await store.dispatch('loadProducts');
-await store.dispatch('loadCollections');
-await store.dispatch('loadMedias');
+const loadStore = async () => {
+    await store.dispatch('loadPhotos');
+    await store.dispatch('loadTags');
+    await store.dispatch('loadServices');
+    await store.dispatch('loadProducts');
+    await store.dispatch('loadCollections');
+    await store.dispatch('loadMedias');
+};
 
-createApp(App).use(router).use(store).mount('#app');
+loadStore().then(() => {
+    createApp(App).use(router).use(store).mount('#app');
+});

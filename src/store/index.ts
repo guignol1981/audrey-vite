@@ -75,9 +75,6 @@ export default new Vuex.Store({
         cartItems(state, cartItems: AppCartItem[]): void {
             state.cartItems = [...cartItems];
         },
-        scrollY(state, scrollY: number): void {
-            state.scrollY = scrollY;
-        },
     },
     actions: {
         async loadPhotos(
