@@ -21,13 +21,20 @@
             >
                 <MenuIcon />
             </button>
-            <button
-                class="fixed top-3 left-3 z-50 h-10 w-10 rounded-full bg-white p-2 text-gray-700 shadow-md hover:text-gray-800"
-                @click="cartOpen = !cartOpen"
+            <a
+                href="#"
+                @click.prevent="cartOpen = !cartOpen"
+                class="fixed top-4 left-4 z-50 rounded-full bg-white p-2 shadow-md"
             >
-                {{ cartItems.length }}
-                <ShoppingBagIcon />
-            </button>
+                <ShoppingBagIcon
+                    class="h-10 w-10 text-gray-700 hover:text-gray-900"
+                />
+                <div
+                    class="absolute -top-2 -right-2 flex items-center justify-center rounded-full bg-blue-logo py-1 px-2 text-sm text-white"
+                >
+                    {{ cartItems.length }}
+                </div>
+            </a>
         </a>
         <div class="hidden items-center justify-between space-x-6 px-8 lg:flex">
             <a

@@ -4,9 +4,13 @@
         href="#"
         class="group relative block overflow-hidden bg-yellow-logo/40 transition hover:shadow-md"
         :src="photo.photoUrl"
+        :imgClasses="['group-hover:scale-110', 'transition']"
         @click.prevent="onClick"
     >
-        <a href="#" class="absolute inset-0 flex items-center justify-center">
+        <a
+            href="#"
+            class="absolute inset-0 z-10 flex items-center justify-center transition group-hover:-translate-y-4"
+        >
             <h2
                 class="bg-gradient-to-tr from-yellow-logo/60 to-yellow-logo p-12 text-3xl font-bold uppercase tracking-widest text-white shadow-md backdrop-blur-sm backdrop-sepia"
             >

@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white px-12">
+    <div class="bg-white px-0 md:px-12">
         <div>
             <!-- Mobile filter dialog -->
             <TransitionRoot as="template" :show="mobileFiltersOpen">
@@ -35,9 +35,19 @@
                             class="relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white pb-12 shadow-xl"
                         >
                             <div class="flex items-center justify-between px-4">
-                                <h2 class="text-lg font-medium text-gray-900">
-                                    Filters
+                                <h2
+                                    class="flex w-full items-center text-lg font-medium text-gray-900"
+                                >
+                                    Filtres
+                                    <button
+                                        type="button"
+                                        @click="clearFilters"
+                                        class="flex space-x-2 px-2 py-3 text-gray-500 hover:text-gray-700 active:scale-95"
+                                    >
+                                        <RefreshIcon class="h-6 w-6" />
+                                    </button>
                                 </h2>
+
                                 <button
                                     type="button"
                                     class="-mr-2 flex h-10 w-10 items-center justify-center rounded-md bg-white p-2 text-gray-400"
@@ -48,7 +58,6 @@
                                 </button>
                             </div>
 
-                            <!-- Filters -->
                             <form
                                 class="mt-4 border-t border-gray-200 accent-blue-logo"
                             >
@@ -73,7 +82,8 @@
                                             ]"
                                             @click.prevent="
                                                 filters.collection =
-                                                    collection.id
+                                                    collection.id;
+                                                mobileFiltersOpen = false;
                                             "
                                         >
                                             {{ collection.name }}
@@ -157,7 +167,7 @@
                 >
                     <h1
                         v-if="selectedCollection"
-                        class="text-4xl font-extrabold tracking-tight text-gray-900"
+                        class="text-4xl font-light tracking-tight text-gray-900"
                     >
                         {{ selectedCollection.name }}
                     </h1>
@@ -166,10 +176,17 @@
                     <button
                         type="button"
                         @click="clearFilters"
-                        class="flex space-x-2 text-gray-500 hover:text-gray-700 active:scale-95"
+                        class="hidden space-x-2 text-gray-500 hover:text-gray-700 active:scale-95 lg:flex"
                     >
                         <span> Réinitisaliser les filtres </span>
                         <RefreshIcon class="h-6 w-6" />
+                    </button>
+                    <button
+                        type="button"
+                        @click="mobileFiltersOpen = true"
+                        class="block text-gray-500 hover:text-gray-700 active:scale-95 lg:hidden"
+                    >
+                        <FilterIcon class="h-6 w-6" />
                     </button>
                 </div>
 
@@ -357,6 +374,8 @@ export default {
             }
 
             store.commit('filters', filters.value);
+
+            this.mobileFiltersOpen = false;
         };
 
         const clearFilters = () => {

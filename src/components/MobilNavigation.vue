@@ -30,7 +30,7 @@
                         leave-from="translate-x-0"
                         leave-to="translate-x-full"
                     >
-                        <div class="w-screen max-w-md">
+                        <div class="w-screen max-w-xs">
                             <div class="h-full bg-white px-4 py-10 shadow-xl">
                                 <ul class="space-y-4">
                                     <li
@@ -69,7 +69,6 @@ import {
     DialogOverlay,
 } from '@headlessui/vue';
 import { ref } from '@vue/reactivity';
-import { ShoppingBagIcon } from '@heroicons/vue/outline';
 
 const open = ref(false);
 
@@ -79,7 +78,6 @@ export default {
         TransitionChild,
         Dialog,
         DialogOverlay,
-        ShoppingBagIcon,
     },
     props: {
         links: {
