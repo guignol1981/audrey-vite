@@ -213,6 +213,7 @@
                                                 collection.id
                                                 ? 'font-bold'
                                                 : '',
+                                            'text-2xl',
                                         ]"
                                         @click.prevent="
                                             filters.collection = collection.id

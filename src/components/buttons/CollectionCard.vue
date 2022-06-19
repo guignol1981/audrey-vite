@@ -4,12 +4,12 @@
         href="#"
         class="group relative block overflow-hidden bg-yellow-logo/40 transition hover:shadow-md"
         :src="photo.photoUrl"
-        :imgClasses="['group-hover:scale-110', 'transition']"
+        :imgClasses="['group-hover:scale-110', 'transition', 'duration-700']"
         @click.prevent="onClick"
     >
         <a
             href="#"
-            class="absolute inset-0 z-10 flex items-center justify-center transition group-hover:-translate-y-4"
+            class="absolute inset-0 z-10 flex items-center justify-center transition duration-700 group-hover:-translate-y-4"
         >
             <h2
                 class="bg-gradient-to-tr from-yellow-logo/60 to-yellow-logo p-12 text-3xl font-bold uppercase tracking-widest text-white shadow-md backdrop-blur-sm backdrop-sepia"
@@ -22,16 +22,7 @@
 
 <script>
 import { useStore } from 'vuex';
-import { ref } from '@vue/reactivity';
 import AppCollection from '../../models/collection';
-import {
-    collection,
-    getDocs,
-    getFirestore,
-    query,
-    where,
-} from '@firebase/firestore';
-import { AppPhotoDataConverter } from '../../models/photo';
 import LazyPhotoVue from '../LazyPhoto.vue';
 
 export default {

@@ -9,21 +9,18 @@
                     v-for="incentive in incentives"
                     :key="incentive.title"
                     :class="[
-                        'relative flex-col items-center  space-y-5 rounded-md border py-5 px-2 transition hover:scale-105 hover:shadow-md sm:flex',
-                        incentive.color,
+                        'relative rounded-md border-t py-12 px-2 shadow-blue-logo transition duration-700 hover:-translate-y-4 hover:shadow-md sm:flex',
                     ]"
                 >
-                    <div class="mx-auto">
-                        <component
-                            :is="incentive.icon"
-                            class="h-12 w-12 stroke-black"
-                        />
-                    </div>
-                    <div class="mt-3 sm:mt-0 sm:ml-3">
-                        <h3 class="text-sm font-medium text-gray-900">
+                    <component
+                        :is="incentive.icon"
+                        class="absolute inset-x-0 top-0 mx-auto h-14 w-14 -translate-y-1/2 rounded-sm bg-white stroke-black p-2"
+                    />
+                    <div class="mt-3 cursor-default sm:mt-0 sm:ml-3">
+                        <h3 class="text-xl font-medium text-gray-900">
                             {{ incentive.title }}
                         </h3>
-                        <p class="mt-2 text-sm text-gray-500">
+                        <p class="mt-5 text-sm leading-7 text-gray-500">
                             {{ incentive.description }}
                         </p>
                     </div>
@@ -49,19 +46,16 @@ export default {
                 title: 'Fait au Québec',
                 description: `En plus d'encourager une artiste du Québec, mes impressions sont effectués localement par des gens d'ici.`,
                 icon: QuebecIconVue,
-                color: 'border-blue-logo',
             },
             {
                 title: 'Épargnez sur la livraison',
                 description: `Livraison gratuite pour toute commande de 200,00$+`,
                 icon: CoinIconVue,
-                color: 'border-yellow-logo',
             },
             {
                 title: 'Satisfaction garantie',
                 description: `Si vous n'êtes pas entièrement satisait(e) de votre achat, vous aurez la possibilité d'échanger pour un autre produit de même valeur.`,
                 icon: WarrantyVue,
-                color: 'border-green-logo',
             },
         ];
 

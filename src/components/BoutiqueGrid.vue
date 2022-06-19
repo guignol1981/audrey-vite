@@ -4,18 +4,18 @@
     </div>
     <div
         v-else
-        class="grid grid-cols-1 items-end space-y-12 md:grid-cols-2 md:space-y-48 lg:grid-cols-4"
+        class="grid grid-cols-1 items-end md:grid-cols-2 lg:grid-cols-4"
     >
         <a
             v-for="(photo, i) in photos"
             :key="i"
             href="#"
-            :class="['group relative']"
+            :class="['group relative mt-12 first:mt-0 md:mt-6 md:first:mt-0']"
             @click.prevent="photoQuickviewId = photo.id"
         >
             <boutique-card-vue
                 :class="[
-                    'px-8 transition group-hover:-translate-y-6 group-hover:scale-105',
+                    'px-8 transition duration-700 group-hover:-translate-y-6 group-hover:scale-105',
                 ]"
                 :photo="photo"
             />

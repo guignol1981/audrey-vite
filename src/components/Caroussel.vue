@@ -9,9 +9,9 @@
             </TabPanel>
         </TabPanels>
         <div class="mx-auto w-full max-w-2xl sm:block lg:max-w-none">
-            <TabList class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+            <TabList class="flex space-x-3">
                 <Tab
-                    class="relative flex h-24 cursor-pointer items-center justify-center rounded-md bg-white text-sm font-medium uppercase text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-offset-4"
+                    class="relative flex aspect-square h-24 cursor-pointer items-center justify-center rounded-md bg-white text-sm font-medium uppercase text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-offset-4"
                     v-slot="{ selected }"
                 >
                     <span class="absolute inset-0 overflow-hidden rounded-md">
@@ -30,7 +30,7 @@
                     />
                 </Tab>
                 <Tab
-                    class="relative flex h-24 cursor-pointer items-center justify-center rounded-md bg-white text-sm font-medium uppercase text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-offset-4"
+                    class="relative flex aspect-square h-24 cursor-pointer items-center justify-center rounded-md bg-white text-sm font-medium uppercase text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-offset-4"
                     v-slot="{ selected }"
                     v-if="product && product.metadata.afficherMockup === 'true'"
                 >

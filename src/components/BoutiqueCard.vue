@@ -5,7 +5,7 @@
             photo.orientation === 'paysage' ? 'aspect-[3/2]' : 'aspect-[2/3]',
             ' bg-yellow-logo/40',
         ]"
-        :imgClasses="['shadow-md']"
+        :img-classes="['shadow-md']"
     >
     </lazy-photo-vue>
 </template>
